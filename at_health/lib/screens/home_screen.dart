@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:at_commons/at_commons.dart';
-import 'package:newserverdemo/services/server_demo_service.dart';
+import 'package:health/services/server_demo_service.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
 

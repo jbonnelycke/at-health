@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:newserverdemo/screens/home_screen.dart';
-import 'package:newserverdemo/screens/login_screen.dart';
+import 'package:health/screens/home_screen.dart';
+import 'package:health/screens/login_screen.dart';
 
 void main() {
   runApp(MyApp());

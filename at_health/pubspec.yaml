@@ -1,5 +1,5 @@
-name: newserverdemo
-description: A new Flutter application.
+name: health
+description: At_Health Application for Appathon 2020
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -29,3 +29,9 @@ dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: RopaSans
+      fonts:
+        - asset: assets/RopaSans-Regular.ttf
+  assets:
+    - assets/health_logo.png
