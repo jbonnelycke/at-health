@@ -5,9 +5,11 @@ import 'package:at_commons/at_commons.dart';
 import 'package:health/services/server_demo_service.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   static final String id = 'home';
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -17,12 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
   //update
   String _key;
   String _value;
+
   // lookup
   TextEditingController _lookupTextFieldController = TextEditingController();
   String _lookupKey;
   String _lookupValue = '';
+
   // scan
   List<String> _scanItems = List<String>();
+
   // service
   ServerDemoService _atClientService = ServerDemoService.getInstance();
 
@@ -35,208 +40,178 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Home',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            //update
-            Container(
-              width: 500,
-              height: 250,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                color: Colors.white,
-                elevation: 10,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.create, size: 70),
-                      title: Text('Update ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0
-                        ),
-                      ),
-                      subtitle: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          TextField(
-                            decoration:
-                            InputDecoration(hintText: 'Enter Key'),
-                            // TODO: Assign the key
-                            onChanged: (key) {
-                              _key = key;
-                            },
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Enter Value'),
-                            // TODO: Assign the value
-                            onChanged: (value) {
-                              _value = value;
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: FlatButton(
-                        child: Text('Update'),
-                        color: Colors.blueAccent,
-                        textColor: Colors.white,
-                        // TODO: Complete the onPressed function
-                        onPressed: _update,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+        appBar: GradientAppBar(
+            title: Padding(
+              padding: const EdgeInsets.fromLTRB(135, 0, 0, 0),
+              child: Image.asset('assets/health_logo.png'),
             ),
-            //scan
-            Container(
-              width: 500,
-              height: 180,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                color: Colors.white,
-                elevation: 10,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.scanner, size: 70),
-                      title: Text('Scan',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0
-                        ),
-                      ),
-                      subtitle: DropdownButton<String>(
-                        hint: Text('Select Key'),
-                        // TODO: complete these parameters
-                        items: _scanItems.map(
-                          (String key) {
-                            return DropdownMenuItem(
-                              value: key != null ? key : null,
-                              child: Text(key),
-                            );
-                          }
-                        ).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            _lookupKey = value;
-                            _lookupTextFieldController.text = value;
-                          });
-                        },
-                        value: _scanItems.length > 0
-                        ? _scanItems[0] : '',
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(20),
-                      child: FlatButton(
-                        child: Text('Scan'),
-                        color: Colors.blueAccent,
-                        textColor: Colors.white,
-                        // TODO: Complete the onPressed function
-                        onPressed: _scan,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //lookup
-            Container(
-              width: 500,
-              height: 300,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                color: Colors.white,
-                elevation: 10,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.list, size: 70),
-                      title: Text('LookUp',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      subtitle: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextField(
-                            decoration:
-                            InputDecoration(hintText: 'Enter Key'),
-                            // TODO: Assign the controller
-                            controller: _lookupTextFieldController,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Lookup Result : ",
-                            style: TextStyle(
-                              fontSize: 20,
+            backgroundColorStart: Color(0xffF55E61),
+            backgroundColorEnd: Color(0xffFFE4BC)),
+        body: Center(
+          child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xffFFD4A9), Color(0xffFFBF90)])),
+              child: Column(
+                children: [
+                  Container(
+                      width: 500,
+                      height: 125,
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
+                          color: Color(0xff5CCB88),
+                          child: ButtonBar(
+                            children: <Widget>[
+                              FlatButton(
+                                child: Icon(Icons.home_rounded), //TODO
+                                //color: Colors.blue,
+                                onPressed: () {},
+                              ),
+                              FlatButton(
+                                child: Icon(Icons.fitness_center_rounded),
+                                //TODO
+                                //color: Colors.blue,
+                                onPressed: () {
+                                  /** */
+                                },
+                              ),
+                              FlatButton(
+                                child: Icon(Icons.insert_link_rounded),
+                                //color: Colors.blue,
+                                onPressed: () {
+                                  /** */
+                                },
+                              ),
+                              FlatButton(
+                                child: Icon(Icons.account_circle_outlined),
+                                //color: Colors.blue,
+                                onPressed: () {
+                                  /** */
+                                },
+                              ),
+                            ],
+                          ))),
+                  Container(
+                      width: 500,
+                      height: 130,
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
+                        child: Text(
+                          'What\'s up Doc?',
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontFamily: 'RopaSans',
                               fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                      ))),
+                  Container(
+                      width: 500,
+                      height: 200,
+                      child: ButtonBar(children: <Widget>[
+                        MaterialButton(
+                          padding: EdgeInsets.all(8.0),
+                          textColor: Colors.white,
+                          splashColor: Colors.greenAccent,
+                          elevation: 8.0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("LOG CALORIES"),
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // TODO: assign a String to the Text widget
-                          Text('$_lookupValue',
-                            style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                          // ),
+                          onPressed: () {
+                            print('Tapped');
+                          },
+                        ),
+                        MaterialButton(
+                          padding: EdgeInsets.all(8.0),
+                          textColor: Colors.white,
+                          splashColor: Colors.greenAccent,
+                          elevation: 8.0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("LOG WORKOUT"),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(20),
-                      child: FlatButton(
-                        child: Text('Lookup'),
-                        color: Colors.blueAccent,
-                        textColor: Colors.white,
-                        // TODO: complete the onPressed function
-                        onPressed: _lookup,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                          // ),
+                          onPressed: () {
+                            print('Tapped');
+                          },
+                        ),
+                      ])),
+                  Container(
+                      width: 500,
+                      height: 200,
+                      child: ButtonBar(children: <Widget>[
+                        MaterialButton(
+                          padding: EdgeInsets.all(8.0),
+                          textColor: Colors.white,
+                          splashColor: Colors.greenAccent,
+                          elevation: 8.0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("CHECKLIST"),
+                            ),
+                          ),
+                          // ),
+                          onPressed: () {
+                            print('Tapped');
+                          },
+                        ),
+                        MaterialButton(
+                          padding: EdgeInsets.all(8.0),
+                          textColor: Colors.white,
+                          splashColor: Colors.greenAccent,
+                          elevation: 8.0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("SHOP"),
+                            ),
+                          ),
+                          // ),
+                          onPressed: () {
+                            print('Tapped');
+                          },
+                        ),
+                      ]))
+                ],
+              )),
+        ));
   }
+
   // TODO: add the _scan, _update, and _lookup methods
   _update() async {
     if (_key != null && _value != null) {
@@ -250,9 +225,11 @@ class _HomeScreenState extends State<HomeScreen> {
   _scan() async {
     List<String> response = await _atClientService.getKeys(sharedBy: atSign);
     if (response.length > 0) {
-      List<String> scanList =
-          response.map((key) => key.replaceAll('.' + conf.namespace +
-              atSign, '').replaceAll(atSign + ':', '')).toList();
+      List<String> scanList = response
+          .map((key) => key
+              .replaceAll('.' + conf.namespace + atSign, '')
+              .replaceAll(atSign + ':', ''))
+          .toList();
       setState(() {
         _scanItems = scanList;
       });
@@ -273,4 +250,3 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
-

@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: HomeScreen.id,
       routes: {
-        LoginScreen.id: (context) => LoginScreen(),
         HomeScreen.id: (context) => HomeScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
       },
     );
   }
