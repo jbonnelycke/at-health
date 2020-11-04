@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:health/screens/home_screen.dart';
+import 'package:health/screens/log_workout.dart';
 import 'package:health/screens/login_screen.dart';
-
+import 'package:health/screens/log_calories.dart';
 void main() {
   runApp(MyApp());
 }
@@ -16,10 +17,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: HomeScreen.id,
+      initialRoute: LogWorkout.id,
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        LogCalories.id: (context) => LogCalories(),
+        LogWorkout.id: (context) => LogWorkout(),
       },
     );
   }
