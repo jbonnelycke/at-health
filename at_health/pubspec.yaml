@@ -36,3 +36,4 @@ flutter:
         - asset: assets/RopaSans-Regular.ttf
   assets:
     - assets/health_logo.png
+    - assets/user.png

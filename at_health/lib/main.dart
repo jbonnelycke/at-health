@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:health/screens/home_screen.dart';
 import 'package:health/screens/login_screen.dart';
+import 'package:health/screens/profile_screen.dart';
+import 'package:health/screens/medcard_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        ProfileScreen.id: (context) => ProfileScreen(),
+        MedCardScreen.id: (context) => MedCardScreen(),
       },
     );
   }

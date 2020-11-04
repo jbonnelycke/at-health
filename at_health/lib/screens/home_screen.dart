@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:at_commons/at_commons.dart';
+import 'package:health/screens/profile_screen.dart';
 import 'package:health/services/server_demo_service.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
@@ -54,161 +55,217 @@ class _HomeScreenState extends State<HomeScreen> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [Color(0xffFFD4A9), Color(0xffFFBF90)])),
-              child: Column(
-                children: [
-                  Container(
-                      width: 500,
-                      height: 125,
-                      child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0)),
-                          color: Color(0xff5CCB88),
-                          child: ButtonBar(
-                            children: <Widget>[
-                              FlatButton(
-                                child: Icon(Icons.home_rounded), //TODO
-                                //color: Colors.blue,
-                                onPressed: () {},
-                              ),
-                              FlatButton(
-                                child: Icon(Icons.fitness_center_rounded),
-                                //TODO
-                                //color: Colors.blue,
+              child: Column(children: [
+                Container(
+                    width: 500,
+                    height: 125,
+                    child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                        color: Color(0xff5CCB88),
+                        child: ButtonBar(
+                          children: <Widget>[
+                            FlatButton(
+                              child: Icon(Icons.home_rounded), //TODO
+                              //color: Colors.blue,
+                              onPressed: () {},
+                            ),
+                            FlatButton(
+                              child: Icon(Icons.fitness_center_rounded),
+                              //TODO
+                              //color: Colors.blue,
+                              onPressed: () {
+                                /** */
+                              },
+                            ),
+                            FlatButton(
+                              child: Icon(Icons.insert_link_rounded),
+                              //color: Colors.blue,
+                              onPressed: () {
+                                /** */
+                              },
+                            ),
+                            FlatButton(
+                              child: Icon(Icons.account_circle_outlined),
+                              //color: Colors.blue,
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    new MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ProfileScreen()));
+                              },
+                            ),
+                          ],
+                        ))),
+                Container(
+                    width: 500,
+                    height: 130,
+                    child: Center(
+                        child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
+                      child: Text(
+                        'What\'s up Doc?',
+                        style: TextStyle(
+                            fontSize: 50,
+                            fontFamily: 'RopaSans',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      ),
+                    ))),
+                Container(
+                    width: 500,
+                    height: 200,
+                    child: Row(children: <Widget>[
+                      Expanded(
+                          child: SizedBox(
+                              width: 250,
+                              child: MaterialButton(
+                                //padding: EdgeInsets.all(8.0),
+                                textColor: Colors.white,
+                                splashColor: Colors.greenAccent,
+                                elevation: 8.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                                child: Container(
+                                  width: 145,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomLeft,
+                                        colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                                    child: Text("LOG CALORIES",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: 'RopaSans',
+                                        )),
+                                  ),
+                                ),
+                                // ),
                                 onPressed: () {
-                                  /** */
+                                  print('Tapped');
                                 },
-                              ),
-                              FlatButton(
-                                child: Icon(Icons.insert_link_rounded),
-                                //color: Colors.blue,
+                              ))
+                      ),
+                      Expanded(
+                          child: SizedBox(
+                              width: 250,
+                              child: MaterialButton(
+                                //padding: EdgeInsets.all(8.0),
+                                textColor: Colors.white,
+                                splashColor: Colors.greenAccent,
+                                elevation: 8.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                                child: Container(
+                                  width: 145,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomLeft,
+                                        colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                                    child: Text("LOG EXERCISE",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: 'RopaSans',
+                                        )),
+                                  ),
+                                ),
+                                // ),
                                 onPressed: () {
-                                  /** */
+                                  print('Tapped');
                                 },
-                              ),
-                              FlatButton(
-                                child: Icon(Icons.account_circle_outlined),
-                                //color: Colors.blue,
+                              ))
+                      )
+                    ])),
+                Container(
+                    width: 500,
+                    height: 200,
+                    child: Row(children: <Widget>[
+                      Expanded(
+                          child: SizedBox(
+                              width: 250,
+                              child: MaterialButton(
+                                //padding: EdgeInsets.all(8.0),
+                                textColor: Colors.white,
+                                splashColor: Colors.greenAccent,
+                                elevation: 8.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                                child: Container(
+                                  width: 145,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomLeft,
+                                        colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                                    child: Text("CHECKLIST",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: 'RopaSans',
+                                        )),
+                                  ),
+                                ),
+                                // ),
                                 onPressed: () {
-                                  /** */
+                                  print('Tapped');
                                 },
-                              ),
-                            ],
-                          ))),
-                  Container(
-                      width: 500,
-                      height: 130,
-                      child: Center(
+                              ))
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          width: 250,
+                          child: MaterialButton(
+                        //padding: EdgeInsets.all(8.0),
+                        textColor: Colors.white,
+                        splashColor: Colors.greenAccent,
+                        elevation: 8.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        child: Container(
+                          width: 145,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
+                          ),
                           child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
-                        child: Text(
-                          'What\'s up Doc?',
-                          style: TextStyle(
-                              fontSize: 50,
-                              fontFamily: 'RopaSans',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red),
-                        ),
-                      ))),
-                  Container(
-                      width: 500,
-                      height: 200,
-                      child: ButtonBar(children: <Widget>[
-                        MaterialButton(
-                          padding: EdgeInsets.all(8.0),
-                          textColor: Colors.white,
-                          splashColor: Colors.greenAccent,
-                          elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("LOG CALORIES"),
-                            ),
+                            padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                            child: Text("SHOP",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'RopaSans',
+                                )),
                           ),
-                          // ),
-                          onPressed: () {
-                            print('Tapped');
-                          },
                         ),
-                        MaterialButton(
-                          padding: EdgeInsets.all(8.0),
-                          textColor: Colors.white,
-                          splashColor: Colors.greenAccent,
-                          elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("LOG WORKOUT"),
-                            ),
-                          ),
-                          // ),
-                          onPressed: () {
-                            print('Tapped');
-                          },
-                        ),
-                      ])),
-                  Container(
-                      width: 500,
-                      height: 200,
-                      child: ButtonBar(children: <Widget>[
-                        MaterialButton(
-                          padding: EdgeInsets.all(8.0),
-                          textColor: Colors.white,
-                          splashColor: Colors.greenAccent,
-                          elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("CHECKLIST"),
-                            ),
-                          ),
-                          // ),
-                          onPressed: () {
-                            print('Tapped');
-                          },
-                        ),
-                        MaterialButton(
-                          padding: EdgeInsets.all(8.0),
-                          textColor: Colors.white,
-                          splashColor: Colors.greenAccent,
-                          elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [Color(0xff5CCB88), Color(0xffF55E61)]),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("SHOP"),
-                            ),
-                          ),
-                          // ),
-                          onPressed: () {
-                            print('Tapped');
-                          },
-                        ),
-                      ]))
-                ],
-              )),
+                        // ),
+                        onPressed: () {
+                          print('Tapped');
+                        },
+                      ))
+                      )])),
+              ])),
         ));
   }
 
