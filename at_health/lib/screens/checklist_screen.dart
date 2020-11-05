@@ -109,7 +109,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                 color : Colors.black.withOpacity(0.4),
                 spreadRadius: 1,
                 blurRadius: 4,
-                offset : Offset(0, 4)
+                offset : Offset(0, 2)
             )
           ]
       ),
