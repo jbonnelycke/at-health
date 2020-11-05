@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:health/components/CompTabBar.dart';
 import 'package:health/components/HealthBar.dart';
-import 'package:health/screens/tabs/homeScreen.dart';
+import 'package:health/screens/tabs/HomeScreenTab.dart';
+// import 'package:health/screens/tabs/homeScreen.dart';
 
 class ChallengeScreen extends StatefulWidget {
   static final String id = 'challenge';
@@ -25,15 +26,19 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xffFFE4BC), Color(0xffF55E61)])),
-              child: TabBarView(
-                children: [
-                  HomeScreenTab(),
-                  Text("Junior"),
-                  Text("Was"),
-                  Text("Here")
-                ],
+                      end: Alignment(0.0, 0.9),
+                      colors: [Color(0xffFFE4BC), Color(0xffF55E61)],
+                      stops: [0.9, 1])),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TabBarView(
+                  children: [
+                    HomeScreenTab(context),
+                    Text("Junior"),
+                    Text("Was"),
+                    Text("Here")
+                  ],
+                ),
               ))),
     );
   }

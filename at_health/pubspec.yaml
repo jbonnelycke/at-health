@@ -35,4 +35,4 @@ flutter:
       fonts:
         - asset: assets/RopaSans-Regular.ttf
   assets:
-    - assets/health_logo.png
+    - assets/img/
