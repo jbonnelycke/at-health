@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
+
 class LogWorkout extends StatefulWidget {
   static final String id = 'log workout';
 
@@ -11,6 +12,7 @@ class LogWorkout extends StatefulWidget {
 }
 
 class _LogWorkoutState extends State<LogWorkout> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +49,7 @@ class _LogWorkoutState extends State<LogWorkout> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
+                    onPressed: (){},
                     icon: Icon(
                       Icons.share_rounded,
                       color: Colors.blue[200],
@@ -56,12 +59,10 @@ class _LogWorkoutState extends State<LogWorkout> {
                   SizedBox(
                     width: 200.0,
                   ),
-                  IconButton(
-                      icon: Icon(
-                        Icons.fireplace_rounded,
-                        color: Colors.deepOrangeAccent[200],
-                        size: 40.0,
-                      )
+                  Icon(
+                    Icons.fireplace_rounded,
+                    color: Colors.deepOrangeAccent[200],
+                    size: 40.0,
                   ),
                   ButtonTheme(
                     minWidth: 50,
@@ -69,10 +70,16 @@ class _LogWorkoutState extends State<LogWorkout> {
                     child: FlatButton(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         color: Color(0xff54B87C),
-                        onPressed: (){} ,
+                        onPressed: (){
+                          createAlertDialog(context).then((onValue){
+                            SnackBar mySnackbar = SnackBar(content: Text("Burn goal has been set to: $onValue"));
+                            Scaffold.of(context).showSnackBar(mySnackbar);
+                          });
+                        },
                         child: Text(
                           'Goal',
-                        ) ),
+                        ),
+                    ),
                   ),
 
                 ],
@@ -192,4 +199,38 @@ class _LogWorkoutState extends State<LogWorkout> {
       ),
     );
   }
+}
+
+Future<String> createAlertDialog(BuildContext context){
+  TextEditingController customController = TextEditingController();
+
+  return showDialog(context: context, builder: (context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(18.0)
+      ),
+      backgroundColor: Color(0xffFFD4A9),
+      title: Text(
+        'Enter Burn Calorie Goal:',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'RopaSans',
+            fontWeight: FontWeight.bold,
+            color: Colors.red),
+      ),
+      content: TextField(
+        controller: customController,
+      ),
+      actions: <Widget>[
+        MaterialButton(
+          elevation: 5.0,
+          child: Text('Submit'),
+          onPressed: (){
+            Navigator.of(context).pop(customController.text.toString());
+          },
+        ),
+      ],
+    );
+  });
 }

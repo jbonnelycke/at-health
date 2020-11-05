@@ -59,10 +59,16 @@ class _LogCaloriesState extends State<LogCalories> {
                   FlatButton(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       color: Color(0xff54B87C),
-                      onPressed: (){} ,
+                      onPressed: (){
+                        createAlertDialog(context).then((onValue){
+                          SnackBar mySnackbar = SnackBar(content: Text("Burn goal has been set to: $onValue"));
+                          Scaffold.of(context).showSnackBar(mySnackbar);
+                        });
+                      },
                       child: Text(
                       'Goal',
-                  ) ),
+                  ),
+                  ),
                 ],
               ),
               Padding(
@@ -78,7 +84,9 @@ class _LogCaloriesState extends State<LogCalories> {
                         color: Color(0xff5CCB88)),
                    ),
                    IconButton(
-                     onPressed: (){},
+                     onPressed: (){
+                       createLogAlertDialog(context);
+                     },
                     icon: Icon(
                       Icons.add,
                       size: 40.0,
@@ -116,7 +124,9 @@ class _LogCaloriesState extends State<LogCalories> {
                           color: Color(0xff5CCB88)),
                     ),
                     IconButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        createLogAlertDialog(context);
+                      },
                       icon: Icon(
                         Icons.add,
                         size: 40.0,
@@ -153,7 +163,9 @@ class _LogCaloriesState extends State<LogCalories> {
                           color: Color(0xff5CCB88)),
                     ),
                     IconButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        createLogAlertDialog(context);
+                      },
                       icon: Icon(
                         Icons.add,
                         size: 40.0,
@@ -184,4 +196,88 @@ class _LogCaloriesState extends State<LogCalories> {
       ),
     );
   }
+}
+
+Future<String> createAlertDialog(BuildContext context){
+  TextEditingController customController = TextEditingController();
+
+  return showDialog(context: context, builder: (context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(18.0)
+      ),
+      backgroundColor: Color(0xffFFD4A9),
+      title: Text(
+        'Enter Calorie Intake Goal:',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'RopaSans',
+            fontWeight: FontWeight.bold,
+            color: Colors.red),
+      ),
+      content: TextField(
+        controller: customController,
+      ),
+      actions: <Widget>[
+        MaterialButton(
+          elevation: 5.0,
+          child: Text('Submit'),
+          onPressed: (){
+            Navigator.of(context).pop(customController.text.toString());
+          },
+        ),
+      ],
+    );
+  });
+}
+
+Future<String> createLogAlertDialog(BuildContext context){
+  TextEditingController customController = TextEditingController();
+  TextEditingController customController2 = TextEditingController();
+  return showDialog(context: context, builder: (context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(18.0)
+      ),
+      backgroundColor: Color(0xffFFD4A9),
+      title: Text(
+        'Calorie Log:',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'RopaSans',
+            fontWeight: FontWeight.bold,
+            color: Colors.red),
+      ),
+      content: Container(
+        height: 100,
+        child: Column(
+          children: [
+            TextField(
+              controller: customController,
+              decoration: InputDecoration(
+                hintText: 'Type of Food',
+              ),
+            ),
+            TextField(
+              controller: customController2,
+              decoration: InputDecoration(
+                hintText: 'Amount',
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        MaterialButton(
+          elevation: 5.0,
+          child: Text('Create log'),
+          onPressed: (){
+            Navigator.of(context).pop(customController.text.toString());
+          },
+        ),
+      ],
+    );
+  });
 }
