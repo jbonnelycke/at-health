@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:at_commons/at_commons.dart';
 import 'package:health/screens/profile_screen.dart';
 import 'package:health/services/server_demo_service.dart';
+import 'package:health/screens/home_screen.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -35,7 +36,7 @@ class _MedCardScreenState extends State<MedCardScreen> {
   @override
   void initState() {
     super.initState();
-    _atClientService.initClient(atSign);
+    //_atClientService.initClient(atSign);
   }
 
   @override
@@ -68,7 +69,11 @@ class _MedCardScreenState extends State<MedCardScreen> {
                             FlatButton(
                               child: Icon(Icons.home_rounded), //TODO
                               //color: Colors.blue,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator
+                                    .of(context)
+                                    .pushReplacement(new MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+                              },
                             ),
                             FlatButton(
                               child: Icon(Icons.fitness_center_rounded),

@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _atClientService.initClient(atSign);
+    //_atClientService.initClient(atSign);
   }
 
   @override
