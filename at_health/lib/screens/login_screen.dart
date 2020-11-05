@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:health/components/HealthBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:health/screens/home_screen.dart';
@@ -29,59 +30,47 @@ class _LoginScreenState extends State<LoginScreen> {
             inAsyncCall: showSpinner,
             child: Center(
                 child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [Color(0xffF55E61), Color(0xffFFE4BC)])),
-              child: SingleChildScrollView(
-                  child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly, TODO
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 200, 0, 0),
-                      child: Container(
-                        height: 200.0,
-                        width: 200.0,
-                        child: Text(
-                          '@Health',
-                          style: TextStyle(
-                              fontSize: 50,
-                              fontFamily: 'RopaSans',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: Image.asset('assets/health_logo.png'),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(hintText: 'AtSign'),
-                      //TODO: Assign to controller
-                      controller: _loginTextFieldController,
-                      onChanged: (value) {
-                        atSign = value;
-                      },
-                    ),
-                    ButtonBar(
-                      children: <Widget>[
-                        FlatButton(
-                          child: Text('Login'),
-                          color: Colors.blue,
-                          onPressed: _login,
-                        ),
-                        FlatButton(
-                          child: Text('Cancel'),
-                          color: Colors.blue,
-                          onPressed: () {/** */},
-                        ),
-                      ],
-                    )
-                  ]),
-
-            )
-            ))));
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Color(0xffF55E61), Color(0xffFFE4BC)])),
+                    child: SingleChildScrollView(
+                      child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly, TODO
+                          children: [
+                            Container(
+                              height: 200.0,
+                              width: 200.0,
+                              child: Text(
+                                '@Health',
+                                style: TextStyle(
+                                    fontSize: 50,
+                                    fontFamily: 'RopaSans',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red),
+                              ),
+                            ),
+                            // Container(
+                            //   child: Image.asset('assets/health_logo.png'),
+                            // ),
+                            // Yes(),
+                            ButtonBar(
+                              children: <Widget>[
+                                FlatButton(
+                                  child: Text('Login'),
+                                  color: Colors.blue,
+                                  onPressed: _login,
+                                ),
+                                FlatButton(
+                                  child: Text('Cancel'),
+                                  color: Colors.blue,
+                                  onPressed: () {/** */},
+                                ),
+                              ],
+                            )
+                          ]),
+                    )))));
   }
 
   // TODO: Write _login method
