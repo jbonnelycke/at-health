@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +20,7 @@ class MedCardScreen extends StatefulWidget {
 class _MedCardScreenState extends State<MedCardScreen> {
   // TODO: Instantiate variables
   //update
-  String _key;
+  //String _key;
   String _value;
 
   // lookup
@@ -160,10 +161,7 @@ class _MedCardScreenState extends State<MedCardScreen> {
                                 )),
                           ),
                           onPressed: () {
-                            createPersonalAlertDialog(context).then((onValue){
-                              SnackBar mySnackbar = SnackBar(content: Text("Hello $onValue"));
-                              Scaffold.of(context).showSnackBar(mySnackbar);
-                            });
+                            createPersonalAlertDialog(context);
                           },
                         ),
                       ),
@@ -258,10 +256,13 @@ class _MedCardScreenState extends State<MedCardScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
-              controller: customController,
+              controller: _lookupTextFieldController,
               decoration: InputDecoration(
                 hintText: 'Name'
-              )
+              ),
+              onChanged: (value) {
+                _value = value;
+              },
             ),
             TextField(
                 controller: customController,
@@ -297,12 +298,27 @@ class _MedCardScreenState extends State<MedCardScreen> {
         ),
           actions: <Widget>[
             MaterialButton(
+                elevation: 5.0,
+                child: Text('Show Current Values'),
+                onPressed: () {
+                  //_lookupValue = '
+                  _lookup("name").then((String result) {
+                    setState(() {
+                      print(result);
+                      _lookupTextFieldController.text = result.toString();
+                    });
+                  });
+                }
+            ),
+            MaterialButton(
               elevation: 5.0,
               child: Text('Update'),
               onPressed: () {
+                _update("name");
                 Navigator.of(context).pop(customController.text.toString());
+                _lookupTextFieldController.text = '';
               }
-            )
+            ),
           ]
       );
     });
@@ -404,6 +420,7 @@ class _MedCardScreenState extends State<MedCardScreen> {
                 elevation: 5.0,
                 child: Text('Update'),
                 onPressed: () {
+                  //_update;
                   Navigator.of(context).pop(customController.text.toString());
                 }
             )
@@ -413,10 +430,10 @@ class _MedCardScreenState extends State<MedCardScreen> {
   }
 
   // TODO: add the _scan, _update, and _lookup methods
-  _update() async {
-    if (_key != null && _value != null) {
+  _update(String key) async {
+    if (key != null && _value != null) {
       AtKey pair = AtKey();
-      pair.key = _key;
+      pair.key = key;
       pair.sharedWith = atSign;
       await _atClientService.put(pair, _value);
     }
@@ -436,16 +453,16 @@ class _MedCardScreenState extends State<MedCardScreen> {
     }
   }
 
-  _lookup() async {
-    if (_lookupKey != null) {
+  Future<String> _lookup(String key) async {
+    if (key != null) {
       AtKey lookup = AtKey();
-      lookup.key = _lookupKey;
+      lookup.key = "name";
       lookup.sharedWith = atSign;
       String response = await _atClientService.get(lookup);
+      print(response);
       if (response != null) {
-        setState(() {
-          _lookupValue = response;
-        });
+          print(response);
+           return response;
       }
     }
   }
