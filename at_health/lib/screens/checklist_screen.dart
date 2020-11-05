@@ -40,7 +40,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   }
 
   var closeButton = Positioned(
-      top : 5,
+      top : 25,
       right : 10,
       child : ButtonTheme(
           minWidth : 32,
@@ -91,9 +91,9 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
 
 
   var checklistItem = Container(
-      height : 40,
+      height : 50,
       margin: EdgeInsets.fromLTRB(0,0,0,10),
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
           gradient: RadialGradient(
             center: Alignment(0.7, 2.0),
@@ -134,7 +134,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
         ),
         Text("Item",
             style : TextStyle(
-                fontSize : 12,
+                fontSize : 14,
                 color: Colors.white
             )
         ),
@@ -201,7 +201,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                         margin : EdgeInsets.fromLTRB(10, 20, 10, 0),
                         padding : EdgeInsets.all(10),
                         width : double.infinity,
-                        height : 160,
+                        height : 220,
                         decoration: BoxDecoration(
                             gradient: RadialGradient(
                               center: Alignment(0, 1.5),
