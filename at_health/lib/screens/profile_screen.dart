@@ -8,6 +8,7 @@ import 'package:health/screens/medcard_screen.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:health/screens/challenge_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static final String id = 'profile';
@@ -67,36 +68,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Color(0xff5CCB88),
                           child: ButtonBar(
                             children: <Widget>[
-                              FlatButton(
-                                child: Icon(Icons.home_rounded), //TODO
-                                //color: Colors.blue,
-                                onPressed: () {
-                                  Navigator
-                                      .of(context)
-                                      .pushReplacement(new MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
-                                },
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                child: FlatButton(
+                                  child: Icon(Icons.home_outlined, size: 50, color: Colors.black), //TODO
+                                  //color: Colors.blue,
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        new MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                HomeScreen()));
+                                  },
+                                ),
                               ),
-                              FlatButton(
-                                child: Icon(Icons.fitness_center_rounded),
-                                //TODO
-                                //color: Colors.blue,
-                                onPressed: () {
-                                  /** */
-                                },
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                child: FlatButton(
+                                  child: Icon(Icons.fitness_center_outlined, size: 50, color: Colors.black),
+                                  //TODO
+                                  //color: Colors.blue,
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        new MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                ChallengeScreen()));
+                                  },
+                                ),
                               ),
-                              FlatButton(
-                                child: Icon(Icons.insert_link_rounded),
-                                //color: Colors.blue,
-                                onPressed: () {
-                                  /** */
-                                },
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                child: FlatButton(
+                                  child: Icon(Icons.insert_link_outlined, size: 50, color: Colors.black),
+                                  //color: Colors.blue,
+                                  onPressed: () {
+                                    /** */
+                                  },
+                                ),
                               ),
-                              FlatButton(
-                                child: Icon(Icons.account_circle_outlined),
-                                //color: Colors.blue,
-                                onPressed: () {
-                                  /** */
-                                },
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                child: FlatButton(
+                                  child: Icon(Icons.account_circle_outlined, size: 50, color: Colors.black),
+                                  //color: Colors.blue,
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        new MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                ProfileScreen()));
+                                  },
+                                ),
                               ),
                             ],
                           ))),

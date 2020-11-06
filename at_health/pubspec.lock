@@ -20,7 +20,7 @@ packages:
     description:
       path: at_client
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -29,7 +29,7 @@ packages:
     description:
       path: at_client_mobile
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -38,7 +38,7 @@ packages:
     description:
       path: at_commons
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -56,7 +56,7 @@ packages:
     description:
       path: at_lookup
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -65,7 +65,7 @@ packages:
     description:
       path: at_persistence_secondary_server
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -74,7 +74,7 @@ packages:
     description:
       path: at_persistence_spec
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -83,7 +83,7 @@ packages:
     description:
       path: at_utils
       ref: dev_env
-      resolved-ref: "5792d9bc7a823a4a9dd246831971a4f37c894cf1"
+      resolved-ref: "7aaa1406ec29f1e25b0e5083f9b12d877e1e16a4"
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -94,6 +94,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.1"
   characters:
     dependency: transitive
     description:
@@ -190,6 +197,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  flutter_rounded_progress_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_rounded_progress_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   gradient_app_bar:
     dependency: "direct main"
     description:
