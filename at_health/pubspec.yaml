@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^1.5.1
+  gradient_app_bar: ^0.0.1
+  carousel_slider: ^2.3.1
   at_demo_data:
     git:
       url: git@github.com:atsign-company/at_demos.git
@@ -38,4 +40,8 @@ flutter:
         - asset: assets/RopaSans-Regular.ttf
   assets:
     - assets/health_logo.png
+    - assets/icons8-biceps-48 1.png
+    - assets/icons8-inspection-64 1.png
+    - assets/icons8-shop-64 1.png
+    - assets/icons8-vegan-food-64 1.png
     - assets/user.png

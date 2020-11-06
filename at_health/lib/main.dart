@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:health/screens/MedCardScreen.dart';
+// import 'package:health/screens/challenge_screen.dart';
 import 'package:health/screens/home_screen.dart';
 import 'package:health/screens/log_workout.dart';
 import 'package:health/screens/login_screen.dart';
@@ -22,8 +24,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: HomeScreen.id,
       routes: {
+        // ChallengeScreen.id: (context) => ChallengeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         HomeScreen.id: (context) => HomeScreen(),
         LogCalories.id: (context) => LogCalories(),

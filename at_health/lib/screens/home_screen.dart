@@ -1,5 +1,6 @@
-import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health/screens/tabs/ChallengeScreebTab.dart';
 import 'package:flutter/widgets.dart';
 import 'package:at_commons/at_commons.dart';
 import 'package:health/screens/profile_screen.dart';
@@ -14,9 +15,11 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   static final String id = 'home';
-
+  
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() {
+    return _HomeScreenState();
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:health/components/HealthBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:health/screens/home_screen.dart';
@@ -23,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-            // TODO: Assign boolean to inAsyncCall
             children: <Widget>[
                 Container(
                     decoration: BoxDecoration(
