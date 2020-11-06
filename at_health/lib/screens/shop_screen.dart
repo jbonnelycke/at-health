@@ -9,7 +9,7 @@ import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ShopScreen extends StatefulWidget {
-  static final String id = 'checklist';
+  static final String id = 'shop';
 
   @override
   _ShopScreenState createState() => _ShopScreenState();
