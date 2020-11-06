@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:at_commons/at_commons.dart';
 import 'package:health/screens/profile_screen.dart';
+import 'package:health/screens/log_calories.dart';
+import 'package:health/screens/log_workout.dart';
+import 'package:health/screens/checklist_screen.dart';
+import 'package:health/screens/shop_screen.dart';
 import 'package:health/services/server_demo_service.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
@@ -147,7 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 // ),
                                 onPressed: () {
-                                  print('Tapped');
+                                  Navigator.of(context).pushReplacement(
+                                      new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              LogCalories()));
                                 },
                               ))
                       ),
@@ -183,7 +190,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 // ),
                                 onPressed: () {
-                                  print('Tapped');
+                                  Navigator.of(context).pushReplacement(
+                                      new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              LogWorkout()));
                                 },
                               ))
                       )
@@ -224,7 +234,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 // ),
                                 onPressed: () {
-                                  print('Tapped');
+                                  Navigator.of(context).pushReplacement(
+                                      new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              ChecklistScreen()));
                                 },
                               ))
                       ),
@@ -260,7 +273,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         // ),
                         onPressed: () {
-                          print('Tapped');
+                          Navigator.of(context).pushReplacement(
+                              new MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ShopScreen()));
                         },
                       ))
                       )])),

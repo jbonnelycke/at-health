@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-
+import 'package:health/screens/home_screen.dart';
 
 class LogWorkout extends StatefulWidget {
   static final String id = 'log workout';
@@ -19,7 +19,43 @@ class _LogWorkoutState extends State<LogWorkout> {
       appBar: GradientAppBar(
           title: Padding(
             padding: const EdgeInsets.fromLTRB(135, 0, 0, 0),
-            child: Image.asset('assets/health_logo.png'),
+            child: Row(
+              children: [
+                Image.asset('assets/health_logo.png'),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
+                  child: Positioned(
+                      top : 25,
+                      right : 10,
+                      child : ButtonTheme(
+                          minWidth : 32,
+                          height : 32,
+                          child : RaisedButton(
+                              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    new MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomeScreen()));
+                              },
+                              shape : RoundedRectangleBorder(
+                                  borderRadius : BorderRadius.circular(40),
+                                  side : BorderSide(color : Color(0xfff55e61))
+                              ),
+                              color : Color(0xfff55e61),
+                              textColor: Colors.white,
+                              child : Text("X",
+                                  style : TextStyle(
+                                      fontSize : 12,
+                                      color: Colors.white
+                                  )
+                              )
+                          )
+                      )
+                  ),
+                ),
+              ],
+            ),
           ),
           backgroundColorStart: Color(0xffF55E61),
           backgroundColorEnd: Color(0xffFFE4BC)),

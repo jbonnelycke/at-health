@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:at_commons/at_commons.dart';
-import 'package:health/screens/profile_screen.dart';
+import 'package:health/screens/home_screen.dart';
 import 'package:health/services/server_demo_service.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
@@ -40,30 +40,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
     super.initState();
   }
 
-  var closeButton = Positioned(
-      top : 25,
-      right : 10,
-      child : ButtonTheme(
-          minWidth : 32,
-          height : 32,
-          child : RaisedButton(
-              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-              onPressed: () => {},
-              shape : RoundedRectangleBorder(
-                  borderRadius : BorderRadius.circular(40),
-                  side : BorderSide(color : Color(0xfff55e61))
-              ),
-              color : Color(0xfff55e61),
-              textColor: Colors.white,
-              child : Text("X",
-                  style : TextStyle(
-                      fontSize : 12,
-                      color: Colors.white
-                  )
-              )
-          )
-      )
-  );
 
   var addButton = Positioned(
       bottom : 5,
@@ -99,7 +75,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
           gradient: RadialGradient(
             center: Alignment(0.7, 2.0),
             radius : 3.0,
-            colors : [
+            colors: [
               Color(0xffffbe8f),
               Color(0xfff55e61)
             ],
@@ -196,7 +172,35 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                                   ]
                               ),
                             ),
-                            closeButton,
+                            Positioned(
+                                top : 25,
+                                right : 10,
+                                child : ButtonTheme(
+                                    minWidth : 32,
+                                    height : 32,
+                                    child : RaisedButton(
+                                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacement(
+                                              new MaterialPageRoute(
+                                                  builder: (BuildContext context) =>
+                                                      HomeScreen()));
+                                        },
+                                        shape : RoundedRectangleBorder(
+                                            borderRadius : BorderRadius.circular(40),
+                                            side : BorderSide(color : Color(0xfff55e61))
+                                        ),
+                                        color : Color(0xfff55e61),
+                                        textColor: Colors.white,
+                                        child : Text("X",
+                                            style : TextStyle(
+                                                fontSize : 12,
+                                                color: Colors.white
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
                             addButton
                           ],
                         )
@@ -224,7 +228,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                                           gradient: RadialGradient(
                                             center: Alignment(0.2, 2.0),
                                             radius : 1.4,
-                                            colors : [
+                                            colors: [
                                               Color(0xfff55e61),
                                               Color(0xff5ccb88)
                                             ],
