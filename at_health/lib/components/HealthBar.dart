@@ -6,7 +6,7 @@ Widget HealthBar({Widget bottom}) {
   var gradientAppBar = new GradientAppBar(
     title: Padding(
       padding: const EdgeInsets.fromLTRB(135, 0, 0, 0),
-      child: Image.asset('assets/img/health_logo.png'),
+      child: Image.asset('assets/health_logo.png'),
     ),
     bottom: bottom,
     gradient: LinearGradient(

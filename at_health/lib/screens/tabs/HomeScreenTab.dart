@@ -58,7 +58,7 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
+                              Image.asset("assets/icons8-vegan-food-64 1.png"),
                               Text("LOG CALORIES",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -108,8 +108,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/icons8-biceps-48 1.png"),
+                              Text("LOG WORKOUTS",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -164,8 +164,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/icons8-inspection-64 1.png"),
+                              Text("CHECKLIST",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -214,8 +214,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/icons8-shop-64 1.png"),
+                              Text("SHOP",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
