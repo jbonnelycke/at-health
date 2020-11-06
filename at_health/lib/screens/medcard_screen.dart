@@ -18,18 +18,22 @@ class MedCardScreen extends StatefulWidget {
 }
 
 class _MedCardScreenState extends State<MedCardScreen> {
-  // TODO: Instantiate variables
-  //update
-  //String _key;
-  String _value;
+
+  String _nameValue;
+  String _addressValue;
+  String _contactValue;
+  String _dobValue;
+  String _heightValue;
+  String _weightValue;
+
 
   // lookup
-  TextEditingController _lookupTextFieldController = TextEditingController();
-  String _lookupKey;
-  String _lookupValue = '';
-
-  // scan
-  List<String> _scanItems = List<String>();
+  TextEditingController _lookupNameTextFieldController = TextEditingController();
+  TextEditingController _lookupAddressTextFieldController = TextEditingController();
+  TextEditingController _lookupContactTextFieldController = TextEditingController();
+  TextEditingController _lookupDOBTextFieldController = TextEditingController();
+  TextEditingController _lookupHeightTextFieldController = TextEditingController();
+  TextEditingController _lookupWeightTextFieldController = TextEditingController();
 
   // service
   ServerDemoService _atClientService = ServerDemoService.getInstance();
@@ -256,43 +260,58 @@ class _MedCardScreenState extends State<MedCardScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
-              controller: _lookupTextFieldController,
+              controller: _lookupNameTextFieldController,
               decoration: InputDecoration(
                 hintText: 'Name'
               ),
               onChanged: (value) {
-                _value = value;
+                _nameValue = value;
               },
             ),
             TextField(
-                controller: customController,
+                controller: _lookupAddressTextFieldController,
                 decoration: InputDecoration(
                     hintText: 'Address'
-                )
+                ),
+              onChanged: (value) {
+                _addressValue = value;
+              },
             ),
             TextField(
-                controller: customController,
+                controller: _lookupContactTextFieldController,
                 decoration: InputDecoration(
                     hintText: 'Emergency Contact'
-                )
+                ),
+              onChanged: (value) {
+                _contactValue = value;
+              },
             ),
             TextField(
-                controller: customController,
+                controller: _lookupDOBTextFieldController,
                 decoration: InputDecoration(
                     hintText: 'D.O.B.'
-                )
+                ),
+              onChanged: (value) {
+                _dobValue = value;
+              },
             ),
             TextField(
-                controller: customController,
+                controller: _lookupHeightTextFieldController,
                 decoration: InputDecoration(
                     hintText: 'Height'
-                )
+                ),
+              onChanged: (value) {
+                _heightValue = value;
+              },
             ),
             TextField(
-                controller: customController,
+                controller: _lookupWeightTextFieldController,
                 decoration: InputDecoration(
                     hintText: 'Weight'
-                )
+                ),
+              onChanged: (value) {
+                _weightValue = value;
+              },
             ),
           ],
         ),
@@ -305,7 +324,37 @@ class _MedCardScreenState extends State<MedCardScreen> {
                   _lookup("name").then((String result) {
                     setState(() {
                       print(result);
-                      _lookupTextFieldController.text = result.toString();
+                      _lookupNameTextFieldController.text = result.toString();
+                    });
+                  });
+                  _lookup("address").then((String result) {
+                    setState(() {
+                      print(result);
+                      _lookupAddressTextFieldController.text = result.toString();
+                    });
+                  });
+                  _lookup("contact").then((String result) {
+                    setState(() {
+                      print(result);
+                      _lookupContactTextFieldController.text = result.toString();
+                    });
+                  });
+                  _lookup("dob").then((String result) {
+                    setState(() {
+                      print(result);
+                      _lookupDOBTextFieldController.text = result.toString();
+                    });
+                  });
+                  _lookup("height").then((String result) {
+                    setState(() {
+                      print(result);
+                      _lookupHeightTextFieldController.text = result.toString();
+                    });
+                  });
+                  _lookup("weight").then((String result) {
+                    setState(() {
+                      print(result);
+                      _lookupWeightTextFieldController.text = result.toString();
                     });
                   });
                 }
@@ -314,9 +363,19 @@ class _MedCardScreenState extends State<MedCardScreen> {
               elevation: 5.0,
               child: Text('Update'),
               onPressed: () {
-                _update("name");
+                  _update("name", _nameValue);
+                  _update("address", _addressValue);
+                  _update("contact", _contactValue);
+                  _update("dob", _dobValue);
+                  _update("height", _heightValue);
+                  _update("weight", _weightValue);
                 Navigator.of(context).pop(customController.text.toString());
-                _lookupTextFieldController.text = '';
+                _lookupNameTextFieldController.text = '';
+                _lookupAddressTextFieldController.text = '';
+                _lookupContactTextFieldController.text = '';
+                _lookupDOBTextFieldController.text = '';
+                _lookupHeightTextFieldController.text = '';
+                _lookupWeightTextFieldController.text = '';
               }
             ),
           ]
@@ -430,40 +489,26 @@ class _MedCardScreenState extends State<MedCardScreen> {
   }
 
   // TODO: add the _scan, _update, and _lookup methods
-  _update(String key) async {
-    if (key != null && _value != null) {
+  _update(String key, String value) async {
+    if (key != null && value != null) {
       AtKey pair = AtKey();
       pair.key = key;
       pair.sharedWith = atSign;
-      await _atClientService.put(pair, _value);
-    }
-  }
-
-  _scan() async {
-    List<String> response = await _atClientService.getKeys(sharedBy: atSign);
-    if (response.length > 0) {
-      List<String> scanList = response
-          .map((key) => key
-          .replaceAll('.' + conf.namespace + atSign, '')
-          .replaceAll(atSign + ':', ''))
-          .toList();
-      setState(() {
-        _scanItems = scanList;
-      });
+      await _atClientService.put(pair, value);
     }
   }
 
   Future<String> _lookup(String key) async {
     if (key != null) {
       AtKey lookup = AtKey();
-      lookup.key = "name";
+      lookup.key = key;
       lookup.sharedWith = atSign;
       String response = await _atClientService.get(lookup);
       print(response);
       if (response != null) {
-          print(response);
            return response;
       }
+      return "not found";
     }
   }
 }
