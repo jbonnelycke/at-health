@@ -9,10 +9,8 @@ Widget HealthBar({Widget bottom}) {
       child: Image.asset('assets/health_logo.png'),
     ),
     bottom: bottom,
-    gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [Color(0xffF55E61), Color(0xffFFE4BC)]),
-  );
+    backgroundColorStart: Color(0xffF55E61),
+        backgroundColorEnd: Color(0xffFFE4BC),
+        );
   return gradientAppBar;
 }

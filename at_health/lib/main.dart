@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: MedCardScreen.id,
+      initialRoute: HomeScreen.id,
       routes: {
         // ChallengeScreen.id: (context) => ChallengeScreen(),
         LoginScreen.id: (context) => LoginScreen(),

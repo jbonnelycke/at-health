@@ -5,6 +5,7 @@ import 'package:health/components/CompTabBar.dart';
 import 'package:health/components/HealthBar.dart';
 import 'package:health/screens/tabs/ChallengeScreebTab.dart';
 import 'package:health/screens/tabs/HomeScreenTab.dart';
+import 'package:health/screens/tabs/ProfileScreenTab.dart';
 // import 'package:health/screens/tabs/homeScreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     HomeScreenTab(context),
                     ChallengeScreenTab(),
                     Text("Was"),
-                    Text("Here")
-                  ],
+                    ProfileScreenTab(context)                  ],
                 ),
               ))),
     );
