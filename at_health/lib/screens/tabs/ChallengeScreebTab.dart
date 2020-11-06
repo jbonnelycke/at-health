@@ -36,23 +36,23 @@ class _ChallengeScreenTabState extends State<ChallengeScreenTab> {
     var _AvailableChallenges = <Map<String, dynamic>>[
       {
         'name': 'Girls get Gains part 1',
-        'description': 'A new core',
+        'description': 'The Fitness Menace',
         'totalChallenges': 20,
-        'completeChallenges': 1,
+        'completeChallenges': 0,
         'timed': true,
       },
       {
         'name': 'Girls get Gains part 2',
-        'description': 'The Pushups Strike Back',
+        'description': 'Attack of the Core',
         'totalChallenges': 20,
-        'completeChallenges': 5,
+        'completeChallenges': 0,
         'timed': true,
       },
       {
         'name': 'Girls get Gains part 3',
-        'description': 'Return of the swole thighs',
+        'description': 'Revenge of the Wall Sits',
         'totalChallenges': 20,
-        'completeChallenges': 5,
+        'completeChallenges': 0,
         'timed': true,
       },
     ];
