@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,7 +5,6 @@ import 'package:at_commons/at_commons.dart';
 import 'package:health/screens/profile_screen.dart';
 import 'package:health/services/server_demo_service.dart';
 import 'package:health/screens/home_screen.dart';
-import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -323,37 +321,31 @@ class _MedCardScreenState extends State<MedCardScreen> {
                   //_lookupValue = '
                   _lookup("name").then((String result) {
                     setState(() {
-                      print(result);
                       _lookupNameTextFieldController.text = result.toString();
                     });
                   });
                   _lookup("address").then((String result) {
                     setState(() {
-                      print(result);
                       _lookupAddressTextFieldController.text = result.toString();
                     });
                   });
                   _lookup("contact").then((String result) {
                     setState(() {
-                      print(result);
                       _lookupContactTextFieldController.text = result.toString();
                     });
                   });
                   _lookup("dob").then((String result) {
                     setState(() {
-                      print(result);
                       _lookupDOBTextFieldController.text = result.toString();
                     });
                   });
                   _lookup("height").then((String result) {
                     setState(() {
-                      print(result);
                       _lookupHeightTextFieldController.text = result.toString();
                     });
                   });
                   _lookup("weight").then((String result) {
                     setState(() {
-                      print(result);
                       _lookupWeightTextFieldController.text = result.toString();
                     });
                   });
@@ -504,7 +496,6 @@ class _MedCardScreenState extends State<MedCardScreen> {
       lookup.key = key;
       lookup.sharedWith = atSign;
       String response = await _atClientService.get(lookup);
-      print(response);
       if (response != null) {
            return response;
       }
