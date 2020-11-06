@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:health/screens/MedCardScreen.dart';
 // import 'package:health/screens/challenge_screen.dart';
 import 'package:health/screens/home_screen.dart';
 import 'package:health/screens/log_workout.dart';
@@ -10,6 +9,7 @@ import 'package:health/screens/profile_screen.dart';
 import 'package:health/screens/medcard_screen.dart';
 import 'package:health/screens/shop_screen.dart';
 import 'package:health/screens/checklist_screen.dart';
+import 'package:health/screens/challenge_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: HomeScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
         // ChallengeScreen.id: (context) => ChallengeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         MedCardScreen.id: (context) => MedCardScreen(),
         ShopScreen.id: (context) => ShopScreen(),
         ChecklistScreen.id: (context) => ChecklistScreen(),
+        ChallengeScreen.id: (context) => ChallengeScreen(),
       },
     );
   }
