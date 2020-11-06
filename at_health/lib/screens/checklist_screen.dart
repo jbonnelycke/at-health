@@ -8,6 +8,7 @@ import 'package:health/services/server_demo_service.dart';
 import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class ChecklistScreen extends StatefulWidget {
   static final String id = 'checklist';
@@ -54,7 +55,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
               ),
               color : Color(0xfff55e61),
               textColor: Colors.white,
-              child : Text("<Close>",
+              child : Text("X",
                   style : TextStyle(
                       fontSize : 12,
                       color: Colors.white
@@ -65,11 +66,11 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   );
 
   var addButton = Positioned(
-      bottom : -30,
-      right : 10,
+      bottom : 5,
+      right : 5,
       child : ButtonTheme(
-          minWidth : 32,
-          height : 32,
+          minWidth : 64,
+          height : 64,
           child : RaisedButton(
               padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
               onPressed: () => {},
@@ -79,9 +80,9 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
               ),
               color : Color(0xfff55e61),
               textColor: Colors.white,
-              child : Text("<Add>",
+              child : Text("+",
                   style : TextStyle(
-                      fontSize : 12,
+                      fontSize : 24,
                       color: Colors.white
                   )
               )
@@ -91,8 +92,8 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
 
 
   var checklistItem = Container(
-      height : 50,
-      margin: EdgeInsets.fromLTRB(0,0,0,10),
+      height : 60,
+      margin: EdgeInsets.fromLTRB(0,0,0,15),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
           gradient: RadialGradient(
@@ -166,16 +167,18 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
               child: Column(
                   children: [
                     Container(
-                        color : Color(0xff5ccb88),
                         margin : EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        height : 90,
+                        height : 150,
                         width : double.infinity,
                         child : Stack(
                           children: <Widget>[
                             Container(
                               padding : EdgeInsets.fromLTRB(10, 35, 10, 10),
+                              color : Color(0xff5ccb88),
+                              width : double.infinity,
+                              height : 120,
                               child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children : [
                                       Text("My Checklists",
@@ -194,44 +197,65 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                               ),
                             ),
                             closeButton,
+                            addButton
                           ],
                         )
                     ),
                     Container(
-                        margin : EdgeInsets.fromLTRB(10, 20, 10, 0),
-                        padding : EdgeInsets.all(10),
-                        width : double.infinity,
-                        height : 220,
-                        decoration: BoxDecoration(
-                            gradient: RadialGradient(
-                              center: Alignment(0, 1.5),
-                              radius : 1.6,
-                              colors : [
-                                Color(0xfff55e61),
-                                Color(0xff5ccb88)
-                              ],
+                        margin : EdgeInsets.fromLTRB(0,5,0,0),
+                        child:CarouselSlider(
+                            options: CarouselOptions(
+                                height : 220,
+                                initialPage: 0,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                enlargeCenterPage : true,
+                                scrollDirection: Axis.horizontal
                             ),
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
-                            boxShadow : [
-                              BoxShadow(
-                                  color : Colors.black.withOpacity(0.4),
-                                  spreadRadius: 1,
-                                  blurRadius: 4,
-                                  offset : Offset(0, 4)
-                              )
-                            ]
+                            items: [1, 2, 3, 4, 5].map((i) {
+                              return Builder(
+                                  builder : (BuildContext context) {
+                                    return Container(
+                                      margin : EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                      padding : EdgeInsets.all(10),
+                                      width : double.infinity,
+                                      height : 160,
+                                      decoration: BoxDecoration(
+                                          gradient: RadialGradient(
+                                            center: Alignment(0.2, 2.0),
+                                            radius : 1.4,
+                                            colors : [
+                                              Color(0xfff55e61),
+                                              Color(0xff5ccb88)
+                                            ],
+                                          ),
+                                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                                          boxShadow : [
+                                            BoxShadow(
+                                                color : Colors.black.withOpacity(0.4),
+                                                spreadRadius: 1,
+                                                blurRadius: 4,
+                                                offset : Offset(0, 4)
+                                            )
+                                          ]
+                                      ),
+                                      child : Text("Checklist $i",
+                                          style : TextStyle(
+                                              fontSize : 16,
+                                              color: Colors.white
+                                          )
+                                      ),
+                                    );
+                                  }
+                              );
+                            }).toList()
                         ),
-                        child : Text("Checklist #1",
-                            style : TextStyle(
-                                fontSize : 16,
-                                color: Colors.white
-                            )
-                        ),
+
                     ),
                     Expanded(
                         child: Container(
-                            padding : EdgeInsets.fromLTRB(10, 0, 10, 10),
-                            margin : EdgeInsets.fromLTRB(0,5,0,0),
+                            padding : EdgeInsets.fromLTRB(20, 0, 20, 10),
+
                             child : new ListView(
                                 children : <Widget>[
                                   checklistItem,
