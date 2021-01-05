@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: Text("LOGIN",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 16,
                                                   fontFamily: 'RopaSans',
                                                 )
                                             ),
@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: Text("REGISTER",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 16,
                                                   fontFamily: 'RopaSans',
                                                 )
                                             ),
