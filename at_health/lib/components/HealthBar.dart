@@ -10,9 +10,10 @@ Widget HealthBar({Widget bottom}) {
     ),
     bottom: bottom,
     gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [Color(0xffF55E61), Color(0xffFFE4BC)]),
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [Color(0xffF55E61), Color(0xffFFE4BC)],
+    ),
   );
   return gradientAppBar;
 }

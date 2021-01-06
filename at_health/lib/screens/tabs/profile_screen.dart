@@ -44,9 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final PC = new PageController(initialPage: 0);
-    return PageView(
-        controller: PC,
-        physics: new NeverScrollableScrollPhysics(),
+    return PageView(controller: PC, scrollDirection: Axis.horizontal,
+        // physics: new NeverScrollableScrollPhysics(),
+        // physics: new FixedExtentScrollPhysics(),
         children: <Widget>[
           Center(
               child: Container(

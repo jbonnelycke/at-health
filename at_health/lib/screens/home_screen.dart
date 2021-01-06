@@ -30,17 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       begin: Alignment.topCenter,
                       end: Alignment(0.0, 0.9),
                       colors: [Color(0xffFFE4BC), Color(0xffF55E61)],
-                      stops: [0.9, 1])),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TabBarView(
-                  children: [
-                    HomeScreenTab(context),
-                    ChallengeScreenTab(),
-                    Text("Was"),
-                    ProfileScreen()
-                  ],
-                ),
+                      stops: [0.95, 1])),
+              child: TabBarView(
+                children: [
+                  HomeScreenTab(context),
+                  ChallengeScreenTab(),
+                  Text("Was"),
+                  ProfileScreen()
+                ],
               ))),
     );
   }

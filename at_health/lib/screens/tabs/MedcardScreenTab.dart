@@ -50,143 +50,145 @@ class _MedCardScreenState extends State<MedCardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Container(
-          // decoration: BoxDecoration(
-          //     gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: [Color(0xffFFD4A9), Color(0xffFFBF90)])),
-          color: Colors.transparent,
-          child: Column(children: [
-            Row(
-              children: [
-                Container(
-                    width: 200,
-                    height: 130,
-                    child: Center(
+        body: Container(
+            // backgroundColor: Colors.transparent,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                // color: Colors.blue.withOpacity(0.5),
+
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xffFFD4A9), Color(0xffFFBF90)])),
+            // color: Colors.transparent,
+            child: Column(children: [
+              Row(
+                children: [
+                  Container(
+                      width: 200,
+                      height: 130,
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 40, 20),
+                        child: Text(
+                          'MedCard',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 40,
+                              fontFamily: 'RopaSans',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                      ))),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(115, 0, 0, 20),
+                      // child: Container(
+                      //     width: 90.0,
+                      //     height: 90.0,
+                      //     decoration: BoxDecoration(
+                      //         shape: BoxShape.circle,
+                      //         image: DecorationImage(
+                      //           fit: BoxFit.fill,
+                      //           image: ExactAssetImage('assets/user.png'),
+                      //         ))),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  child: Container(
+                    child: ButtonTheme(
+                      minWidth: 375.0,
+                      height: 50.0,
+                      child: RaisedButton(
+                        //padding: EdgeInsets.all(8.0),
+                        textColor: Colors.white,
+                        splashColor: Colors.greenAccent,
+                        elevation: 8.0,
+                        color: Color(0xff5CCB88),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0)),
                         child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 40, 20),
-                      child: Text(
-                        'MedCard',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 40,
-                            fontFamily: 'RopaSans',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
+                          padding: const EdgeInsets.fromLTRB(90, 15, 90, 15),
+                          child: Text("PERSONAL",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontFamily: 'RopaSans',
+                              )),
+                        ),
+                        onPressed: () {
+                          createPersonalAlertDialog(context);
+                        },
                       ),
-                    ))),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(115, 0, 0, 20),
-                    // child: Container(
-                    //     width: 90.0,
-                    //     height: 90.0,
-                    //     decoration: BoxDecoration(
-                    //         shape: BoxShape.circle,
-                    //         image: DecorationImage(
-                    //           fit: BoxFit.fill,
-                    //           image: ExactAssetImage('assets/user.png'),
-                    //         ))),
-                  ),
-                )
-              ],
-            ),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                child: Container(
-                  child: ButtonTheme(
-                    minWidth: 375.0,
-                    height: 50.0,
-                    child: RaisedButton(
-                      //padding: EdgeInsets.all(8.0),
-                      textColor: Colors.white,
-                      splashColor: Colors.greenAccent,
-                      elevation: 8.0,
-                      color: Color(0xff5CCB88),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0)),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(90, 15, 90, 15),
-                        child: Text("PERSONAL",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'RopaSans',
-                            )),
-                      ),
-                      onPressed: () {
-                        createPersonalAlertDialog(context);
-                      },
                     ),
-                  ),
-                )),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                child: Container(
-                  child: ButtonTheme(
-                    minWidth: 375.0,
-                    height: 50.0,
-                    child: RaisedButton(
-                      //padding: EdgeInsets.all(8.0),
-                      textColor: Colors.white,
-                      splashColor: Colors.greenAccent,
-                      elevation: 8.0,
-                      color: Color(0xff5CCB88),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0)),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(90, 15, 90, 15),
-                        child: Text("INSURANCE",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'RopaSans',
-                            )),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  child: Container(
+                    child: ButtonTheme(
+                      minWidth: 375.0,
+                      height: 50.0,
+                      child: RaisedButton(
+                        //padding: EdgeInsets.all(8.0),
+                        textColor: Colors.white,
+                        splashColor: Colors.greenAccent,
+                        elevation: 8.0,
+                        color: Color(0xff5CCB88),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(90, 15, 90, 15),
+                          child: Text("INSURANCE",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontFamily: 'RopaSans',
+                              )),
+                        ),
+                        onPressed: () {
+                          createInsureAlertDialog(context).then((onValue) {
+                            SnackBar mySnackbar =
+                                SnackBar(content: Text("Hello $onValue"));
+                            Scaffold.of(context).showSnackBar(mySnackbar);
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        createInsureAlertDialog(context).then((onValue) {
-                          SnackBar mySnackbar =
-                              SnackBar(content: Text("Hello $onValue"));
-                          Scaffold.of(context).showSnackBar(mySnackbar);
-                        });
-                      },
                     ),
-                  ),
-                )),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                child: Container(
-                  child: ButtonTheme(
-                    minWidth: 375.0,
-                    height: 65,
-                    child: RaisedButton(
-                      //padding: EdgeInsets.all(8.0),
-                      textColor: Colors.white,
-                      splashColor: Colors.greenAccent,
-                      elevation: 8.0,
-                      color: Color(0xff5CCB88),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0)),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 15, 40, 15),
-                        child: Text("IMMUNIZATIONS AND ALLERGIES",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontFamily: 'RopaSans',
-                            )),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  child: Container(
+                    child: ButtonTheme(
+                      minWidth: 375.0,
+                      height: 65,
+                      child: RaisedButton(
+                        //padding: EdgeInsets.all(8.0),
+                        textColor: Colors.white,
+                        splashColor: Colors.greenAccent,
+                        elevation: 8.0,
+                        color: Color(0xff5CCB88),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(30, 15, 40, 15),
+                          child: Text("IMMUNIZATIONS AND ALLERGIES",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontFamily: 'RopaSans',
+                              )),
+                        ),
+                        onPressed: () {
+                          createImmuneAlertDialog(context).then((onValue) {
+                            SnackBar mySnackbar =
+                                SnackBar(content: Text("Hello $onValue"));
+                            Scaffold.of(context).showSnackBar(mySnackbar);
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        createImmuneAlertDialog(context).then((onValue) {
-                          SnackBar mySnackbar =
-                              SnackBar(content: Text("Hello $onValue"));
-                          Scaffold.of(context).showSnackBar(mySnackbar);
-                        });
-                      },
                     ),
-                  ),
-                )),
-          ])),
-    ));
+                  )),
+            ])));
   }
 
   Future<String> createPersonalAlertDialog(BuildContext context) {

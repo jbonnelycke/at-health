@@ -58,8 +58,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/img/calories-logo.png"),
+                              Text("Log Calories",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -108,8 +108,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/img/workout-logo.png"),
+                              Text("LOG Workout",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -164,8 +164,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/img/checklist-logo.png"),
+                              Text("CChecklist",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -214,8 +214,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/img/icons8-biceps-48 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/img/shop-logo.png"),
+                              Text("Shop",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
