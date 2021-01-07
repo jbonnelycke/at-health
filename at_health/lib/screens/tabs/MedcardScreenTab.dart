@@ -13,11 +13,18 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 class MedCardScreen extends StatefulWidget {
   static final String id = 'medcard';
 
+  final PageController controller;
+
+  MedCardScreen({PageController controller}) : this.controller = controller;
+
   @override
-  _MedCardScreenState createState() => _MedCardScreenState();
+  _MedCardScreenState createState() => _MedCardScreenState(controller);
 }
 
 class _MedCardScreenState extends State<MedCardScreen> {
+  _MedCardScreenState(this.controller);
+  final PageController controller;
+
   String _nameValue;
   String _addressValue;
   String _contactValue;
@@ -62,6 +69,11 @@ class _MedCardScreenState extends State<MedCardScreen> {
                     colors: [Color(0xffFFD4A9), Color(0xffFFBF90)])),
             // color: Colors.transparent,
             child: Column(children: [
+              Container(
+                child: TextButton(
+                    onPressed: () => {controller.jumpToPage(0)},
+                    child: Text("< Back")),
+              ),
               Row(
                 children: [
                   Container(

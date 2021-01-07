@@ -1,6 +1,7 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:health/screens/subpages/log_calories.dart';
 
 Widget HomeScreenTab(BuildContext context) {
   return Column(
@@ -72,7 +73,10 @@ Widget HomeScreenTab(BuildContext context) {
                     ),
                     // ),
                     onPressed: () {
-                      print('Tapped');
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  LogCalories()));
                     },
                   ),
                 ),

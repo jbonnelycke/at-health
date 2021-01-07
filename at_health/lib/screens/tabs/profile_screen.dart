@@ -151,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 )),
           ]))),
-          MedCardScreen()
+          MedCardScreen(controller: PC)
         ]);
   }
 
