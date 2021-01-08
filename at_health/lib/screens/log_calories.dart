@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -326,16 +327,19 @@ class _LogCaloriesState extends State<LogCalories> {
                       color: Color(0xff54B87C),
                       onPressed: (){
                         createAlertDialog(context).then((onValue){
-                          SnackBar mySnackBar = SnackBar(
-                            content: Text('Your goal has been set to $onValue calories!',
-                              style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'RopaSans',
-                            )),
-                            backgroundColor: Color(0xff54B87C),
+                          if(!(onValue == "")){
+                            SnackBar mySnackBar = SnackBar(
+                              content: Text('Your diet goal has been set to $onValue calories!',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'RopaSans',
+                                  )),
+                              backgroundColor: Color(0xff54B87C),
 
-                          );
-                          Scaffold.of(context).showSnackBar(mySnackBar);
+                            );
+                            Scaffold.of(context).showSnackBar(mySnackBar);
+                          }
+
                         });
                       },
                       child: Text(
