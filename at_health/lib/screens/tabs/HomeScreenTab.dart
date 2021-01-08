@@ -1,6 +1,10 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:health/screens/checklist_screen.dart';
+import 'package:health/screens/shop_screen.dart';
+import 'package:health/screens/subpages/log_calories.dart';
+import 'package:health/screens/subpages/log_workout.dart';
 
 Widget HomeScreenTab(BuildContext context) {
   return Column(
@@ -58,8 +62,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/icons8-vegan-food-64 1.png"),
-                              Text("LOG CALORIES",
+                              Image.asset("assets/calories-logo.png"),
+                              Text("Log Calories",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -72,7 +76,10 @@ Widget HomeScreenTab(BuildContext context) {
                     ),
                     // ),
                     onPressed: () {
-                      print('Tapped');
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  LogCalories()));
                     },
                   ),
                 ),
@@ -108,8 +115,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/icons8-biceps-48 1.png"),
-                              Text("LOG WORKOUTS",
+                              Image.asset("assets/workout-logo.png"),
+                              Text("LOG Workout",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -122,7 +129,9 @@ Widget HomeScreenTab(BuildContext context) {
                     ),
                     // ),
                     onPressed: () {
-                      print('Tapped');
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                              builder: (BuildContext context) => LogWorkout()));
                     },
                   ),
                 ),
@@ -164,8 +173,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/icons8-inspection-64 1.png"),
-                              Text("CHECKLIST",
+                              Image.asset("assets/checklist-logo.png"),
+                              Text("Checklist",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -178,7 +187,10 @@ Widget HomeScreenTab(BuildContext context) {
                     ),
                     // ),
                     onPressed: () {
-                      print('Tapped');
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ChecklistScreen()));
                     },
                   ),
                 ),
@@ -214,8 +226,8 @@ Widget HomeScreenTab(BuildContext context) {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("assets/icons8-shop-64 1.png"),
-                              Text("SHOP",
+                              Image.asset("assets/shop-logo.png"),
+                              Text("Shop",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,
@@ -228,7 +240,9 @@ Widget HomeScreenTab(BuildContext context) {
                     ),
                     // ),
                     onPressed: () {
-                      print('Tapped');
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                              builder: (BuildContext context) => ShopScreen()));
                     },
                   ),
                 ),
