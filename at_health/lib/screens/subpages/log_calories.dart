@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:health/components/HealthBar.dart';
 import 'package:health/screens/home_screen.dart';
 
 class LogCalories extends StatefulWidget {
@@ -16,7 +15,46 @@ class _LogCaloriesState extends State<LogCalories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HealthBar(),
+      appBar: GradientAppBar(
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(135, 0, 0, 0),
+          child: Row(
+            children: [
+              Image.asset('assets/health_logo.png'),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
+                child: Positioned(
+                    top: 25,
+                    right: 10,
+                    child: ButtonTheme(
+                        minWidth: 32,
+                        height: 32,
+                        child: RaisedButton(
+                            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  new MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          HomeScreen()));
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                                side: BorderSide(color: Color(0xfff55e61))),
+                            color: Color(0xfff55e61),
+                            textColor: Colors.white,
+                            child: Text("X",
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.white))))),
+              ),
+            ],
+          ),
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xffF55E61), Color(0xffFFE4BC)],
+        ),
+      ),
       body: Center(
         child: Container(
           decoration: BoxDecoration(
@@ -42,13 +80,11 @@ class _LogCaloriesState extends State<LogCalories> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    icon: Icon(
-                      Icons.share_rounded,
-                      color: Colors.blue[200],
-                      size: 40.0,
-                    ),
-                    onPressed: () => {print("pressed")},
-                  ),
+                      icon: Icon(
+                    Icons.share_rounded,
+                    color: Colors.blue[200],
+                    size: 40.0,
+                  )),
                   SizedBox(
                     width: 250.0,
                   ),
