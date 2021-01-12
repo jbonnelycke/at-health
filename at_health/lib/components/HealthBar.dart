@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
+/*
+TODO: Give logo box shadow
+
+*/
 Widget HealthBar({Widget bottom}) {
   var gradientAppBar = new GradientAppBar(
       title: Padding(

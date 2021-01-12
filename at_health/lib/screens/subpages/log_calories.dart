@@ -6,6 +6,14 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:health/data objects/food.dart';
 import 'package:health/screens/home_screen.dart';
 
+/*
+TODO: Implement data persistence
+TODO: Implement data persistence
+TODO: Add a progress bar
+TODO: Parse Goals to int
+TODO: Add sharing feature
+*/
+
 class LogCalories extends StatefulWidget {
   static final String id = 'log calories';
 
@@ -20,9 +28,35 @@ class _LogCaloriesState extends State<LogCalories> {
   String dtemp;
 
   //List<Food> bfoods = List();
-  List<String> bfoods = List();
-  List<String> lfoods = List();
-  List<String> dfoods = List();
+  // List<String> bfoods = List();
+  // List<String> lfoods = List();
+  // List<String> dfoods = List();
+
+  List<Food> bFoods = List<Food>();
+  List<Food> lFoods = List<Food>();
+  List<Food> dFoods = List<Food>();
+
+  Widget OptionWidget({Food food, List<Food> foodArr, int index}) {
+    return Container(
+      child: Row(
+        children: [
+          IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                editFoodLogAlertDialog(context, food);
+              }),
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                foodArr.removeAt(index);
+                setState(() {
+                  foodArr = foodArr;
+                });
+              }),
+        ],
+      ),
+    );
+  }
 
   Future<String> createAlertDialog(BuildContext context) {
     TextEditingController customController = TextEditingController();
@@ -60,9 +94,11 @@ class _LogCaloriesState extends State<LogCalories> {
         });
   }
 
-  Future<String> createLogAlertDialog(BuildContext context) {
-    TextEditingController customController = TextEditingController();
-    TextEditingController customController2 = TextEditingController();
+  Future<Food> createFoodLogAlertDialog(
+      BuildContext context, List<Food> foodArr) {
+    Food temp;
+    TextEditingController nameCustomController = TextEditingController();
+    TextEditingController amountCustomController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
@@ -84,17 +120,17 @@ class _LogCaloriesState extends State<LogCalories> {
               child: Column(
                 children: [
                   TextField(
-                    controller: customController,
+                    controller: nameCustomController,
                     decoration: InputDecoration(
                       hintText: 'Type of Food',
                     ),
                     onChanged: (str) {
                       //myfood.name = str;
-                      temp = str;
+                      temp.name = str;
                     },
                   ),
                   TextField(
-                    controller: customController2,
+                    controller: amountCustomController,
                     decoration: InputDecoration(
                       hintText: 'Amount',
                     ),
@@ -107,14 +143,33 @@ class _LogCaloriesState extends State<LogCalories> {
                 elevation: 5.0,
                 child: Text('Create log'),
                 onPressed: () {
-                  Navigator.of(context).pop(customController.text.toString());
+                  // try {
                   setState(() {
                     //myfood.name = customController.text;
-                    temp =
-                        customController.text + " - " + customController2.text;
-                    bfoods.add(temp);
+                    // dtemp = nameCustomController.text +
+                    //     " - " +
+                    //     amountCustomController.text;
+                    String name = nameCustomController.text;
+                    print("Worked for name variable " + name);
+                    int amount = int.parse(amountCustomController.text);
+                    print('Worked for amount variable $amount');
+                    temp = new Food(name: name, amount: amount);
+                    print('Worked for food variable,temp, $temp ');
+                    print('Name of Food ${temp.name}');
+                    print('Amount of calories for Food ${temp.amount}');
+                    foodArr.add(temp);
+                    print('Food added to array $foodArr');
                     //bfoods.add(myfood);
                   });
+                  Navigator.of(context).pop(temp);
+                  // } catch (e) {
+                  //   print("We HAVE AN ERROR!!!!!!");
+                  //   print("We HAVE AN ERROR!!!!!!");
+                  //   print("We HAVE AN ERROR!!!!!!");
+                  //   print("We HAVE AN ERROR!!!!!!");
+                  //   print("We HAVE AN ERROR!!!!!!");
+                  //   print(e);
+                  // }
                 },
               ),
             ],
@@ -122,74 +177,16 @@ class _LogCaloriesState extends State<LogCalories> {
         });
   }
 
-  Future<String> createLunchLogAlertDialog(BuildContext context) {
-    TextEditingController customController = TextEditingController();
-    TextEditingController customController2 = TextEditingController();
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(18.0)),
-            backgroundColor: Color(0xffFFD4A9),
-            title: Text(
-              'Calorie Log:',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: 'RopaSans',
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red),
-            ),
-            content: Container(
-              height: 100,
-              child: Column(
-                children: [
-                  TextField(
-                    controller: customController,
-                    decoration: InputDecoration(
-                      hintText: 'Type of Food',
-                    ),
-                    onChanged: (str) {
-                      //myfood.name = str;
-                      ltemp = str;
-                    },
-                  ),
-                  TextField(
-                    controller: customController2,
-                    decoration: InputDecoration(
-                      hintText: 'Amount',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              MaterialButton(
-                elevation: 5.0,
-                child: Text('Create log'),
-                onPressed: () {
-                  Navigator.of(context).pop(customController.text.toString());
-                  setState(() {
-                    //myfood.name = customController.text;
-                    ltemp =
-                        customController.text + " - " + customController2.text;
-                    lfoods.add(ltemp);
-                    //bfoods.add(myfood);
-                  });
-                },
-              ),
-            ],
-          );
-        });
-  }
+  void editFoodLogAlertDialog(BuildContext context, Food food) {
+    TextEditingController nameCustomController = TextEditingController();
+    TextEditingController amountCustomController = TextEditingController();
 
-  Future<String> createDinnerLogAlertDialog(BuildContext context) {
-    TextEditingController customController = TextEditingController();
-    TextEditingController customController2 = TextEditingController();
-    return showDialog(
+    nameCustomController.text = food.name;
+    amountCustomController.text = food.amount.toString();
+
+    showDialog(
         context: context,
-        builder: (context) {
+        builder: (BuildContext context) {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0)),
@@ -208,17 +205,17 @@ class _LogCaloriesState extends State<LogCalories> {
               child: Column(
                 children: [
                   TextField(
-                    controller: customController,
+                    controller: nameCustomController,
                     decoration: InputDecoration(
                       hintText: 'Type of Food',
                     ),
                     onChanged: (str) {
                       //myfood.name = str;
-                      dtemp = str;
+                      food.name = str;
                     },
                   ),
                   TextField(
-                    controller: customController2,
+                    controller: amountCustomController,
                     decoration: InputDecoration(
                       hintText: 'Amount',
                     ),
@@ -231,14 +228,11 @@ class _LogCaloriesState extends State<LogCalories> {
                 elevation: 5.0,
                 child: Text('Create log'),
                 onPressed: () {
-                  Navigator.of(context).pop(customController.text.toString());
+                  // try {
                   setState(() {
-                    //myfood.name = customController.text;
-                    dtemp =
-                        customController.text + " - " + customController2.text;
-                    dfoods.add(dtemp);
-                    //bfoods.add(myfood);
+                    food.amount = int.parse(amountCustomController.text);
                   });
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -297,7 +291,7 @@ class _LogCaloriesState extends State<LogCalories> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [Color(0xffFFD4A9), Color(0xffFFB57F)])),
-              child: Column(
+              child: ListView(
                 children: [
                   Center(
                       child: Padding(
@@ -364,7 +358,7 @@ class _LogCaloriesState extends State<LogCalories> {
                         ),
                         IconButton(
                           onPressed: () {
-                            createLogAlertDialog(context);
+                            createFoodLogAlertDialog(context, bFoods);
                           },
                           icon: Icon(
                             Icons.add,
@@ -379,27 +373,52 @@ class _LogCaloriesState extends State<LogCalories> {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Container(
                       child: ListView(
-                        children: bfoods
-                            .map((element) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 0, 10, 0),
-                                        child: Icon(Icons.fastfood_rounded,
-                                            size: 25.0,
-                                            color: Color(0xffFF898B)),
-                                      ),
-                                      Text(
-                                        element,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: 'RopaSans',
-                                          color: Color(0xffFFE4BC),
+                        children: bFoods
+                            .map((element) => GestureDetector(
+                                  onLongPress: () => {
+                                    editFoodLogAlertDialog(context, element)
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 10, 0),
+                                          child: Icon(Icons.breakfast_dining,
+                                              size: 25.0,
+                                              color: Color(0xffFF898B)),
                                         ),
-                                      ),
-                                    ],
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Text>[
+                                              Text(
+                                                element.name,
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontFamily: 'RopaSans',
+                                                  color: Color(0xffFFE4BC),
+                                                ),
+                                              ),
+                                              Text(
+                                                element.amount.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'RopaSans',
+                                                  color: Color(0xffC4C4C4),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        OptionWidget(
+                                            food: element,
+                                            foodArr: bFoods,
+                                            index: bFoods.indexOf(element))
+                                      ],
+                                    ),
                                   ),
                                 ))
                             .toList(),
@@ -437,7 +456,7 @@ class _LogCaloriesState extends State<LogCalories> {
                         ),
                         IconButton(
                           onPressed: () {
-                            createLunchLogAlertDialog(context);
+                            createFoodLogAlertDialog(context, lFoods);
                           },
                           icon: Icon(
                             Icons.add,
@@ -452,27 +471,52 @@ class _LogCaloriesState extends State<LogCalories> {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Container(
                       child: ListView(
-                        children: lfoods
-                            .map((element) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 0, 10, 0),
-                                        child: Icon(Icons.rice_bowl_rounded,
-                                            size: 25.0,
-                                            color: Color(0xffFF898B)),
-                                      ),
-                                      Text(
-                                        element,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: 'RopaSans',
-                                          color: Color(0xffFFE4BC),
+                        children: lFoods
+                            .map((element) => GestureDetector(
+                                  onLongPress: () => {
+                                    editFoodLogAlertDialog(context, element)
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 10, 0),
+                                          child: Icon(Icons.breakfast_dining,
+                                              size: 25.0,
+                                              color: Color(0xffFF898B)),
                                         ),
-                                      ),
-                                    ],
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Text>[
+                                              Text(
+                                                element.name,
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontFamily: 'RopaSans',
+                                                  color: Color(0xffFFE4BC),
+                                                ),
+                                              ),
+                                              Text(
+                                                element.amount.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'RopaSans',
+                                                  color: Color(0xffC4C4C4),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        OptionWidget(
+                                            food: element,
+                                            foodArr: lFoods,
+                                            index: lFoods.indexOf(element))
+                                      ],
+                                    ),
                                   ),
                                 ))
                             .toList(),
@@ -510,7 +554,7 @@ class _LogCaloriesState extends State<LogCalories> {
                         ),
                         IconButton(
                           onPressed: () {
-                            createDinnerLogAlertDialog(context);
+                            createFoodLogAlertDialog(context, dFoods);
                           },
                           icon: Icon(
                             Icons.add,
@@ -525,27 +569,52 @@ class _LogCaloriesState extends State<LogCalories> {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Container(
                       child: ListView(
-                        children: dfoods
-                            .map((element) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 0, 10, 0),
-                                        child: Icon(Icons.tapas_rounded,
-                                            size: 25.0,
-                                            color: Color(0xffFF898B)),
-                                      ),
-                                      Text(
-                                        element,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: 'RopaSans',
-                                          color: Color(0xffFFE4BC),
+                        children: dFoods
+                            .map((element) => GestureDetector(
+                                  onLongPress: () => {
+                                    editFoodLogAlertDialog(context, element)
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 10, 0),
+                                          child: Icon(Icons.breakfast_dining,
+                                              size: 25.0,
+                                              color: Color(0xffFF898B)),
                                         ),
-                                      ),
-                                    ],
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Text>[
+                                              Text(
+                                                element.name,
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontFamily: 'RopaSans',
+                                                  color: Color(0xffFFE4BC),
+                                                ),
+                                              ),
+                                              Text(
+                                                element.amount.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'RopaSans',
+                                                  color: Color(0xffC4C4C4),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        OptionWidget(
+                                            food: element,
+                                            foodArr: dFoods,
+                                            index: dFoods.indexOf(element))
+                                      ],
+                                    ),
                                   ),
                                 ))
                             .toList(),
