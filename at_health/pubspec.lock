@@ -20,7 +20,7 @@ packages:
     description:
       path: at_client
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -29,7 +29,7 @@ packages:
     description:
       path: at_client_mobile
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -38,7 +38,7 @@ packages:
     description:
       path: at_commons
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -56,7 +56,7 @@ packages:
     description:
       path: at_lookup
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -65,7 +65,7 @@ packages:
     description:
       path: at_persistence_secondary_server
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -74,7 +74,7 @@ packages:
     description:
       path: at_persistence_spec
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -83,7 +83,7 @@ packages:
     description:
       path: at_utils
       ref: dev_env
-      resolved-ref: "57361da5deaf74992602f1eb72f3a3652b4a29c7"
+      resolved-ref: a33fa1556693cd9d6a863f25030faf3c6f0a3ce0
       url: "git@github.com:atsign-company/atsign_foundation.git"
     source: git
     version: "0.1.0"
@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+  json_annotation:
+    dependency: "direct main"
+    description:
+      name: json_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
   logging:
     dependency: transitive
     description:

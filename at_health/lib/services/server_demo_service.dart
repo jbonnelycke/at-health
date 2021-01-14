@@ -29,8 +29,7 @@ class ServerDemoService {
       ..hiveStoragePath = path;
     var result = await atClientServiceInstance.onboard(
         atClientPreference: atClientPreference,
-        atsign: atsign,
-        namespace: conf.namespace);
+        atsign: atsign);
     atClientInstance = atClientServiceInstance.atClient;
     return result;
   }
@@ -38,8 +37,8 @@ class ServerDemoService {
   ///Returns `false` if fails in authenticating [atsign] with [cramSecret]/[privateKey].
   Future<bool> authenticate(String atsign,
       {String cramSecret, String privateKey}) async {
-    var result = await atClientServiceInstance.authenticate(atsign,
-        cramSecret: cramSecret);
+    AtClientPreference preferences = new AtClientPreference();
+    var result = await atClientServiceInstance.authenticate(atsign, preferences);
     atClientInstance = atClientServiceInstance.atClient;
     return result;
   }
