@@ -9,6 +9,7 @@ import '../utils/at_conf.dart' as conf;
 import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:uuid/uuid.dart';
 
 class ChecklistScreen extends StatefulWidget {
   static final String id = 'checklist';
@@ -17,6 +18,131 @@ class ChecklistScreen extends StatefulWidget {
   _ChecklistScreenState createState() => _ChecklistScreenState();
 }
 
+
+class ChecklistListItem {
+  var uuid;
+  var isChecked;
+  var description;
+
+  ChecklistListItem(Uuid uuid, String description){
+    this.uuid = uuid;
+    this.description = description;
+  }
+
+  String getUUID(){
+    return this.uuid;
+  }
+}
+
+var checklistLists = new Map();
+
+class ChecklistList {
+  var uuid;
+  var title;
+  var description;
+  var listItems = new Map();
+
+  ChecklistList(String title, String description){
+    this.title = title;
+    this.description = description;
+
+    this.uuid = Uuid();
+    // todo
+    // check for existing uuid in checklistLists, if it exists, regenerate the uuid
+    checklistLists[uuid] = this;
+
+    print("Created new Checklist");
+    print(title);
+    print(description);
+  }
+
+  void deleteList(){
+    checklistLists.remove(uuid);
+    // todo
+    // remove data from device
+  }
+
+  void addItem(String checklistItemString){
+    var checklistListItemUUID = Uuid();
+    // todo
+    // check for existing uuid in checklist listItems, if it exists, regenerate the uuid
+    var checklistListItem = new ChecklistListItem(checklistListItemUUID, checklistItemString);
+    this.listItems[checklistListItemUUID] = checklistListItem;
+  }
+
+  void removeItem(Uuid checklistItemUUID){
+    this.listItems.remove(checklistItemUUID);
+  }
+}
+
+class ChecklistListItemWidget extends StatelessWidget {
+
+  ChecklistListItemWidget({this.title, this.description});
+
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context){
+    return GestureDetector(
+        onTap: (){
+          print("Test");
+        },
+        child : Container(
+            margin: EdgeInsets.fromLTRB(5,0,5,10),
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment(0.7, 2.0),
+                  radius : 3.0,
+                  colors: [
+                    Color(0xfff55e61),
+                    Color(0xff5ccb88)
+                  ],
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(6)),
+                boxShadow : [
+                  BoxShadow(
+                      color : Colors.black.withOpacity(0.4),
+                      spreadRadius: 1,
+                      blurRadius: 4,
+                      offset : Offset(0, 2)
+                  )
+                ]
+            ),
+            child : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(title,
+                    style : TextStyle(
+                        fontSize : 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
+                    )
+                ),
+                Text(description,
+                    style : TextStyle(
+                        fontSize : 12,
+                        color: Colors.white
+                    )
+                ),
+                Container(
+                  margin : EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child : Text("0/x Completed",
+
+                      style : TextStyle(
+                          fontSize : 10,
+                          color: Colors.white
+                      )
+                  ),
+                )
+              ],
+            )
+        )
+    );
+  }
+}
 
 class _ChecklistScreenState extends State<ChecklistScreen> {
   // TODO: Instantiate variables
@@ -35,11 +161,64 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   // service
   ServerDemoService _atClientService = ServerDemoService.getInstance();
 
+  //
+
+  Future<String> createChecklistListModal(BuildContext context) {
+    TextEditingController checklistListTitleController = TextEditingController();
+    TextEditingController checklistListDescriptionController = TextEditingController();
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(6)),
+            backgroundColor: Color(0xffFFD4A9),
+            title: Text(
+              'Create Checklist',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'RopaSans',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red),
+            ),
+            content: Container(
+              height: 100,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: checklistListTitleController,
+                    decoration: InputDecoration(
+                      hintText: 'Title',
+                    ),
+                  ),
+                  TextField(
+                    controller: checklistListDescriptionController,
+                    decoration: InputDecoration(
+                      hintText: '(Optional) Description',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('Create Checklist'),
+                onPressed: () {
+                  Navigator.of(context).pop(checklistListTitleController.text.toString());
+                  new ChecklistList(checklistListTitleController.text,  checklistListDescriptionController.text);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   void initState() {
     super.initState();
   }
-
 
   var addButton = Positioned(
       bottom : 5,
@@ -65,60 +244,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
           )
       )
   );
-
-
-  var checklistItem = Container(
-      height : 60,
-      margin: EdgeInsets.fromLTRB(0,0,0,15),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          gradient: RadialGradient(
-            center: Alignment(0.7, 2.0),
-            radius : 3.0,
-            colors: [
-              Color(0xffffbe8f),
-              Color(0xfff55e61)
-            ],
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          boxShadow : [
-            BoxShadow(
-                color : Colors.black.withOpacity(0.4),
-                spreadRadius: 1,
-                blurRadius: 4,
-                offset : Offset(0, 2)
-            )
-          ]
-      ),
-    child : Row(
-      children: [
-        Container(
-          width : 20,
-          height : 20,
-          margin : EdgeInsets.fromLTRB(0, 0, 10, 0),
-          decoration: BoxDecoration(
-            color:  Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(2)),
-              boxShadow : [
-                BoxShadow(
-                    color : Colors.black.withOpacity(0.4),
-                    spreadRadius: -2,
-                    blurRadius: 4,
-                    offset : Offset(2, 2)
-                )
-              ]
-          ),
-        ),
-        Text("Item",
-            style : TextStyle(
-                fontSize : 14,
-                color: Colors.white
-            )
-        ),
-      ],
-    )
-  );
-
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +317,8 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                                         ),
                                         color : Color(0xfff55e61),
                                         textColor: Colors.white,
+                                        // todo
+                                        // replace with a nicer close icon
                                         child : Text("X",
                                             style : TextStyle(
                                                 fontSize : 12,
@@ -201,77 +328,60 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                                     )
                                 )
                             ),
-                            addButton
                           ],
                         )
                     ),
-                    Container(
-                        margin : EdgeInsets.fromLTRB(0,5,0,0),
-                        child:CarouselSlider(
-                            options: CarouselOptions(
-                                height : 220,
-                                initialPage: 0,
-                                aspectRatio: 16/9,
-                                viewportFraction: 0.8,
-                                enlargeCenterPage : true,
-                                scrollDirection: Axis.horizontal
-                            ),
-                            items: [1, 2, 3, 4, 5].map((i) {
-                              return Builder(
-                                  builder : (BuildContext context) {
-                                    return Container(
-                                      margin : EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                      padding : EdgeInsets.all(10),
-                                      width : double.infinity,
-                                      height : 160,
-                                      decoration: BoxDecoration(
-                                          gradient: RadialGradient(
-                                            center: Alignment(0.2, 2.0),
-                                            radius : 1.4,
-                                            colors: [
-                                              Color(0xfff55e61),
-                                              Color(0xff5ccb88)
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                                          boxShadow : [
-                                            BoxShadow(
-                                                color : Colors.black.withOpacity(0.4),
-                                                spreadRadius: 1,
-                                                blurRadius: 4,
-                                                offset : Offset(0, 4)
-                                            )
-                                          ]
-                                      ),
-                                      child : Text("Checklist $i",
-                                          style : TextStyle(
-                                              fontSize : 16,
-                                              color: Colors.white
-                                          )
-                                      ),
-                                    );
-                                  }
-                              );
-                            }).toList()
-                        ),
-
-                    ),
                     Expanded(
                         child: Container(
-                            padding : EdgeInsets.fromLTRB(20, 0, 20, 10),
+                            padding : EdgeInsets.fromLTRB(5, 0, 5, 10),
 
                             child : new ListView(
-                                children : <Widget>[
-                                  checklistItem,
-                                  checklistItem,
-                                  checklistItem,
-                                  checklistItem,
-                                  checklistItem,
-                                  checklistItem,
-                                  checklistItem,
-                                ]
+                                children: checklistLists.values.map((checklistListObject) {
+                                  return Builder(
+                                      builder : (BuildContext context){
+                                        return ChecklistListItemWidget(
+                                          title : checklistListObject.title,
+                                          description: checklistListObject.description,
+                                        );
+                                      }
+                                  );
+                                }).toList()
+                                /*
+                                children : [1,2,3,4,5,6].map((i) {
+                                  return Builder(
+                                    builder : (BuildContext context){
+                                      return checklistListItem;
+                                    }
+                                  );
+                                }).toList()
+                                */
                             )
                         )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child : Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children : [
+                            RaisedButton(
+                              onPressed: () {
+                                createChecklistListModal(context);
+                              },
+                              shape : RoundedRectangleBorder(
+                                  borderRadius : BorderRadius.circular(5),
+                                  side : BorderSide(color : Color(0xfff55e61))
+                              ),
+                              color : Color(0xfff55e61),
+                              textColor: Colors.white,
+                              child : Text("New Checklist",
+                                  style : TextStyle(
+                                      fontSize : 14,
+                                      color: Colors.white
+                                  )
+                              )
+                          )
+                        ]
+                      )
                     )
                   ]
               )
