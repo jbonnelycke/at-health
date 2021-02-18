@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'personal.g.dart';
+
 @JsonSerializable()
-class PersonalInformation {
-  PersonalInformation({
+class Personal {
+  Personal({
     @required this.id,
     @required this.name,
     @required this.address,
@@ -19,4 +21,7 @@ class PersonalInformation {
   final String dob;
   final String height;
   final String weight;
+
+  factory Personal.fromJson(Map<String, dynamic> json) => _$PersonalFromJson(json);
+  Map<String, dynamic> toJson() => _$PersonalToJson(this);
 }
