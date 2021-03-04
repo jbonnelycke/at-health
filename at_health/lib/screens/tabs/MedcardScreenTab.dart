@@ -7,6 +7,7 @@ import 'package:health/screens/login_screen.dart';
 import 'package:health/screens/tabs/profile_screen.dart';
 import 'package:health/services/server_demo_service.dart';
 import 'package:health/screens/home_screen.dart';
+
 // import 'login_screen.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -23,6 +24,7 @@ class MedCardScreen extends StatefulWidget {
 
 class _MedCardScreenState extends State<MedCardScreen> {
   _MedCardScreenState(this.controller);
+
   final PageController controller;
 
   String _nameValue;
@@ -33,17 +35,12 @@ class _MedCardScreenState extends State<MedCardScreen> {
   String _weightValue;
 
   // lookup
-  TextEditingController _lookupNameTextFieldController =
-      TextEditingController();
-  TextEditingController _lookupAddressTextFieldController =
-      TextEditingController();
-  TextEditingController _lookupContactTextFieldController =
-      TextEditingController();
+  TextEditingController _lookupNameTextFieldController = TextEditingController();
+  TextEditingController _lookupAddressTextFieldController = TextEditingController();
+  TextEditingController _lookupContactTextFieldController = TextEditingController();
   TextEditingController _lookupDOBTextFieldController = TextEditingController();
-  TextEditingController _lookupHeightTextFieldController =
-      TextEditingController();
-  TextEditingController _lookupWeightTextFieldController =
-      TextEditingController();
+  TextEditingController _lookupHeightTextFieldController = TextEditingController();
+  TextEditingController _lookupWeightTextFieldController = TextEditingController();
 
   // service
   ServerDemoService _atClientService = ServerDemoService.getInstance();

@@ -42,21 +42,21 @@ packages:
       name: at_client
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+5"
+    version: "1.0.1+7"
   at_client_mobile:
     dependency: "direct main"
     description:
       name: at_client_mobile
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0+5"
+    version: "1.0.0+8"
   at_commons:
     dependency: transitive
     description:
       name: at_commons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+4"
+    version: "1.0.1+5"
   at_demo_data:
     dependency: "direct main"
     description:
@@ -70,14 +70,14 @@ packages:
       name: at_lookup
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0+4"
+    version: "1.0.0+5"
   at_persistence_secondary_server:
     dependency: transitive
     description:
       name: at_persistence_secondary_server
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+4"
+    version: "1.0.1+5"
   at_persistence_spec:
     dependency: transitive
     description:
@@ -98,7 +98,7 @@ packages:
       name: at_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+4"
+    version: "1.0.1+5"
   base2e15:
     dependency: transitive
     description:
