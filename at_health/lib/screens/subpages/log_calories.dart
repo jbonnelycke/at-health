@@ -7,11 +7,9 @@ import 'package:health/data objects/food.dart';
 import 'package:health/screens/home_screen.dart';
 
 /*
-TODO: Implement data persistence
-TODO: Implement data persistence
-TODO: Add a progress bar
-TODO: Parse Goals to int
-TODO: Add sharing feature
+TODO: Implement data persistence --> Goes along with sharing feature
+TODO: Add sharing feature --> For future
+TODO: Suggestion: Add notifications to page? Maybe if you click on progress bar, it will tell you the current completion status?
 */
 
 class LogCalories extends StatefulWidget {
@@ -22,16 +20,15 @@ class LogCalories extends StatefulWidget {
 }
 
 class _LogCaloriesState extends State<LogCalories> {
-  //Food myfood = Food(name: "", amount: 1);
+ //Variables to store total calories and calorie sums for each meal
+  double calTotal = 100;
+  double foodSum = 0;
+
+  //temp strings to store food names
   String temp;
   String ltemp;
   String dtemp;
-
-  //List<Food> bfoods = List();
-  // List<String> bfoods = List();
-  // List<String> lfoods = List();
-  // List<String> dfoods = List();
-
+//Food arrays
   List<Food> bFoods = List<Food>();
   List<Food> lFoods = List<Food>();
   List<Food> dFoods = List<Food>();
@@ -43,11 +40,16 @@ class _LogCaloriesState extends State<LogCalories> {
           IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
+                foodSum -= foodArr[index].amount;
                 editFoodLogAlertDialog(context, food);
               }),
           IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
+                setState(() {
+                  foodSum -= foodArr[index].amount;
+                  print("Food sum: $foodSum");
+                });
                 foodArr.removeAt(index);
                 setState(() {
                   foodArr = foodArr;
@@ -110,67 +112,90 @@ class _LogCaloriesState extends State<LogCalories> {
               'Calorie Log:',
               textAlign: TextAlign.left,
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 24,
                   fontFamily: 'RopaSans',
                   fontWeight: FontWeight.bold,
-                  color: Colors.red),
+                  color: Color(0xff5CCB88)),
             ),
             content: Container(
-              height: 100,
+              height: 150,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextField(
                     controller: nameCustomController,
                     decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
                       hintText: 'Type of Food',
+                      hintStyle: TextStyle(
+                          color: Colors.grey[600]),
+                      filled: true,
+                      fillColor: Color(0xffC4C4C4),
                     ),
                     onChanged: (str) {
-                      //myfood.name = str;
                       temp.name = str;
                     },
                   ),
                   TextField(
                     controller: amountCustomController,
                     decoration: InputDecoration(
-                      hintText: 'Amount',
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      hintText: 'Amount of calories',
+                      hintStyle: TextStyle(
+                          color: Colors.grey[600]),
+                      filled: true,
+                      fillColor: Color(0xffC4C4C4),
                     ),
                   ),
                 ],
               ),
             ),
             actions: <Widget>[
-              MaterialButton(
-                elevation: 5.0,
-                child: Text('Create log'),
-                onPressed: () {
-                  // try {
-                  setState(() {
-                    //myfood.name = customController.text;
-                    // dtemp = nameCustomController.text +
-                    //     " - " +
-                    //     amountCustomController.text;
-                    String name = nameCustomController.text;
-                    print("Worked for name variable " + name);
-                    int amount = int.parse(amountCustomController.text);
-                    print('Worked for amount variable $amount');
-                    temp = new Food(name: name, amount: amount);
-                    print('Worked for food variable,temp, $temp ');
-                    print('Name of Food ${temp.name}');
-                    print('Amount of calories for Food ${temp.amount}');
-                    foodArr.add(temp);
-                    print('Food added to array $foodArr');
-                    //bfoods.add(myfood);
-                  });
-                  Navigator.of(context).pop(temp);
-                  // } catch (e) {
-                  //   print("We HAVE AN ERROR!!!!!!");
-                  //   print("We HAVE AN ERROR!!!!!!");
-                  //   print("We HAVE AN ERROR!!!!!!");
-                  //   print("We HAVE AN ERROR!!!!!!");
-                  //   print("We HAVE AN ERROR!!!!!!");
-                  //   print(e);
-                  // }
-                },
+              Padding(
+                padding: const EdgeInsets.fromLTRB(35, 0, 35, 20),
+                child: MaterialButton(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  color: Color(0xffDE3A3D),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                    child: Text(
+                        'Create log',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xffFFE4BC),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      //myfood.name = customController.text;
+                      // dtemp = nameCustomController.text +
+                      //     " - " +
+                      //     amountCustomController.text;
+                      String name = nameCustomController.text;
+                      print("Worked for name variable " + name);
+                      double amount = double.parse(amountCustomController.text);
+                      print('Worked for amount variable $amount');
+                      temp = new Food(name: name, amount: amount);
+                      print('Worked for food variable,temp, $temp ');
+                      print('Name of Food ${temp.name}');
+                      print('Amount of calories for Food ${temp.amount}');
+                      foodArr.add(temp);
+                      print('Food added to array $foodArr');
+                      foodSum += temp.amount;
+                      print("Food sum: $foodSum");
+                    });
+                    Navigator.of(context).pop(temp);
+                  },
+                ),
               ),
             ],
           );
@@ -210,7 +235,6 @@ class _LogCaloriesState extends State<LogCalories> {
                       hintText: 'Type of Food',
                     ),
                     onChanged: (str) {
-                      //myfood.name = str;
                       food.name = str;
                     },
                   ),
@@ -226,11 +250,13 @@ class _LogCaloriesState extends State<LogCalories> {
             actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
-                child: Text('Create log'),
+                child: FlatButton(
+                    child: Text('Create log')),
                 onPressed: () {
-                  // try {
                   setState(() {
-                    food.amount = int.parse(amountCustomController.text);
+                    food.amount = double.parse(amountCustomController.text);
+                    foodSum += food.amount;
+                    print("Food sum: $foodSum");
                   });
                   Navigator.of(context).pop();
                 },
@@ -316,7 +342,17 @@ class _LogCaloriesState extends State<LogCalories> {
                             size: 40.0,
                           )),
                       SizedBox(
+                        //Insert Linear Progress Indicator
                         width: 250.0,
+                        height: 30,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          child: LinearProgressIndicator(
+                            value: foodSum/calTotal,
+                            backgroundColor: Color(0xffC4C4C4),
+                            valueColor: AlwaysStoppedAnimation(Color(0xffF55E61)),
+                          ),
+                        ),
                       ),
                       FlatButton(
                         shape: RoundedRectangleBorder(
@@ -324,6 +360,10 @@ class _LogCaloriesState extends State<LogCalories> {
                         color: Color(0xff54B87C),
                         onPressed: () {
                           createAlertDialog(context).then((onValue) {
+                           setState(() {
+                             calTotal = double.parse(onValue);
+                           });
+                            print(calTotal);
                             if (!(onValue == "")) {
                               SnackBar mySnackBar = SnackBar(
                                 content: Text(
@@ -374,10 +414,10 @@ class _LogCaloriesState extends State<LogCalories> {
                     child: Container(
                       child: ListView(
                         children: bFoods
-                            .map((element) => GestureDetector(
+                            .map((element) =>
+                            GestureDetector(
                                   onLongPress: () => {
-                                    editFoodLogAlertDialog(context, element)
-                                  },
+                                    editFoodLogAlertDialog(context, element)},
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
@@ -474,8 +514,7 @@ class _LogCaloriesState extends State<LogCalories> {
                         children: lFoods
                             .map((element) => GestureDetector(
                                   onLongPress: () => {
-                                    editFoodLogAlertDialog(context, element)
-                                  },
+                                    editFoodLogAlertDialog(context, element)},
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
@@ -572,8 +611,7 @@ class _LogCaloriesState extends State<LogCalories> {
                         children: dFoods
                             .map((element) => GestureDetector(
                                   onLongPress: () => {
-                                    editFoodLogAlertDialog(context, element)
-                                  },
+                                    editFoodLogAlertDialog(context, element)},
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
