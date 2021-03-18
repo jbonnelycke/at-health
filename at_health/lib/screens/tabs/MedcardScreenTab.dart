@@ -33,6 +33,11 @@ class _MedCardScreenState extends State<MedCardScreen> {
   String _dobValue;
   String _heightValue;
   String _weightValue;
+  String _providerValue;
+  String _groupIDValue;
+  String _memberIDValue;
+  String _immunizationValue;
+  String _allergyValue;
 
   // lookup
   TextEditingController _lookupNameTextFieldController = TextEditingController();
@@ -41,6 +46,11 @@ class _MedCardScreenState extends State<MedCardScreen> {
   TextEditingController _lookupDOBTextFieldController = TextEditingController();
   TextEditingController _lookupHeightTextFieldController = TextEditingController();
   TextEditingController _lookupWeightTextFieldController = TextEditingController();
+  TextEditingController _lookupProviderTextFieldController = TextEditingController();
+  TextEditingController _lookupMemberIDTextFieldController = TextEditingController();
+  TextEditingController _lookupGroupIDTextFieldController = TextEditingController();
+  TextEditingController _lookupImmunizationTextFieldController = TextEditingController();
+  TextEditingController _lookupAllergyTextFieldController = TextEditingController();
 
   // service
   ServerDemoService _atClientService = ServerDemoService.getInstance();
@@ -157,9 +167,9 @@ class _MedCardScreenState extends State<MedCardScreen> {
                         ),
                         onPressed: () {
                           createInsureAlertDialog(context).then((onValue) {
-                            SnackBar mySnackbar =
-                                SnackBar(content: Text("Hello $onValue"));
-                            Scaffold.of(context).showSnackBar(mySnackbar);
+                            // SnackBar mySnackbar =
+                            //     SnackBar(content: Text("Hello $onValue"));
+                            // Scaffold.of(context).showSnackBar(mySnackbar);
                           });
                         },
                       ),
@@ -189,9 +199,9 @@ class _MedCardScreenState extends State<MedCardScreen> {
                         ),
                         onPressed: () {
                           createImmuneAlertDialog(context).then((onValue) {
-                            SnackBar mySnackbar =
-                                SnackBar(content: Text("Hello $onValue"));
-                            Scaffold.of(context).showSnackBar(mySnackbar);
+                            // SnackBar mySnackbar =
+                            //     SnackBar(content: Text("Hello $onValue"));
+                            // Scaffold.of(context).showSnackBar(mySnackbar);
                           });
                         },
                       ),
@@ -355,24 +365,66 @@ class _MedCardScreenState extends State<MedCardScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
-                      controller: customController,
-                      decoration: InputDecoration(hintText: 'Provider')),
+                    controller: _lookupProviderTextFieldController,
+                    decoration: InputDecoration(hintText: 'provider'),
+                    onChanged: (value) {
+                      _providerValue = value;
+                    },
+                  ),
                   TextField(
-                      controller: customController,
-                      decoration: InputDecoration(hintText: 'Group ID')),
+                    controller: _lookupGroupIDTextFieldController,
+                    decoration: InputDecoration(hintText: 'groupID'),
+                    onChanged: (value) {
+                      _groupIDValue = value;
+                    },
+                  ),
                   TextField(
-                      controller: customController,
-                      decoration: InputDecoration(hintText: 'Member ID')),
+                    controller: _lookupMemberIDTextFieldController,
+                    decoration: InputDecoration(hintText: 'memberID'),
+                    onChanged: (value) {
+                      _memberIDValue = value;
+                    },
+                  ),
                 ],
               ),
               actions: <Widget>[
                 MaterialButton(
                     elevation: 5.0,
+                    child: Text('Show Current Values'),
+                    onPressed: () {
+                      //_lookupValue = '
+                      _lookup("provider").then((String result) {
+                        setState(() {
+                          _lookupProviderTextFieldController.text =
+                              result.toString();
+                        });
+                      });
+                      _lookup("groupID").then((String result) {
+                        setState(() {
+                          _lookupGroupIDTextFieldController.text =
+                              result.toString();
+                        });
+                      });
+                      _lookup("memberID").then((String result) {
+                        setState(() {
+                          _lookupMemberIDTextFieldController.text =
+                              result.toString();
+                        });
+                      });
+                    }),
+                MaterialButton(
+                    elevation: 5.0,
                     child: Text('Update'),
                     onPressed: () {
+                      _update("provider", _providerValue);
+                      _update("groupID", _groupIDValue);
+                      _update("memberID", _memberIDValue);
                       Navigator.of(context)
                           .pop(customController.text.toString());
-                    })
+                      _lookupProviderTextFieldController.text = '';
+                      _lookupGroupIDTextFieldController.text = '';
+                      _lookupMemberIDTextFieldController.text = '';
+                    }),
               ]);
         });
   }
@@ -388,7 +440,7 @@ class _MedCardScreenState extends State<MedCardScreen> {
                   borderRadius: new BorderRadius.circular(18.0)),
               backgroundColor: Color(0xffFFD4A9),
               title: Text(
-                'Immunizations and Allergies',
+                'Insurance',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     fontSize: 20,
@@ -400,22 +452,51 @@ class _MedCardScreenState extends State<MedCardScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
-                      controller: customController,
-                      decoration: InputDecoration(hintText: 'Immunizations')),
+                    controller: _lookupImmunizationTextFieldController,
+                    decoration: InputDecoration(hintText: 'immunizations'),
+                    onChanged: (value) {
+                      _immunizationValue = value;
+                    },
+                  ),
                   TextField(
-                      controller: customController,
-                      decoration: InputDecoration(hintText: 'Allergies')),
+                    controller: _lookupAllergyTextFieldController,
+                    decoration: InputDecoration(hintText: 'allergies'),
+                    onChanged: (value) {
+                      _allergyValue = value;
+                    },
+                  )
                 ],
               ),
               actions: <Widget>[
                 MaterialButton(
                     elevation: 5.0,
+                    child: Text('Show Current Values'),
+                    onPressed: () {
+                      //_lookupValue = '
+                      _lookup("immunizations").then((String result) {
+                        setState(() {
+                          _lookupImmunizationTextFieldController.text =
+                              result.toString();
+                        });
+                      });
+                      _lookup("allergies").then((String result) {
+                        setState(() {
+                          _lookupAllergyTextFieldController.text =
+                              result.toString();
+                        });
+                      });
+                    }),
+                MaterialButton(
+                    elevation: 5.0,
                     child: Text('Update'),
                     onPressed: () {
-                      //_update;
+                      _update("immunizations", _immunizationValue);
+                      _update("allergies", _allergyValue);
                       Navigator.of(context)
                           .pop(customController.text.toString());
-                    })
+                      _lookupImmunizationTextFieldController.text = '';
+                      _lookupAllergyTextFieldController.text = '';
+                    }),
               ]);
         });
   }
@@ -442,4 +523,6 @@ class _MedCardScreenState extends State<MedCardScreen> {
       return "not found";
     }
   }
+
+  // Potential Upgrade to above creating poll
 }
