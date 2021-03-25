@@ -56,7 +56,6 @@ class _ChallengeScreenTabState extends State<ChallengeScreenTab> {
         'timed': true,
       },
     ];
-    // print(_send[0]['name']);
 
     return Column(children: <Widget>[
       Padding(
