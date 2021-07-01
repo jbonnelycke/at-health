@@ -152,15 +152,37 @@ class _LogWorkoutState extends State<LogWorkout> {
             actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
-                color: AtHealth.red,
                 child: Text('Create log'),
                 onPressed: () {
                   // print(exercise.toString());
                   // print(_timed);
                   exercise.timed = _timed;
+                  print(exercise.timed);
+                  print({
+                    "name": exercise.name,
+                    "reps": exercise.reps,
+                    "sets": exercise.sets,
+                    "timed": exercise.timed,
+                    "duration": exercise.duration,
+                    "target": exercise.target,
+                    // ""
+                  });
                   exercise.target = target;
                   setState(() {
-                    exerciseList.insert(0, exercise);
+                    switch (exercise.target) {
+                      case Target.Cardio:
+                        cardioList.insert(0, exercise);
+                        break;
+                      case Target.Lower_Body:
+                        lowerBodyList.insert(0, exercise);
+                        break;
+                      case Target.Upper_Body:
+                        upperBodyList.insert(0, exercise);
+                        break;
+                      default:
+                        throw ('Something Broke');
+                    }
+                    ;
                   });
                   Navigator.of(context).pop(exercise);
                 },
@@ -177,37 +199,32 @@ class _LogWorkoutState extends State<LogWorkout> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: GradientAppBar(
-        centerTitle: true,
         elevation: 0,
         title: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: Stack(
-            // mainAxisAlignment: MainAxisAlignment.center,
+          padding: const EdgeInsets.fromLTRB(135, 0, 0, 0),
+          child: Row(
             children: [
-              Align(child: Image.asset('assets/health_logo.png')),
-              // new Spacer(),
-              Positioned(
-                right: 0,
-                child: ButtonTheme(
-                    minWidth: 32,
-                    height: 32,
-                    child: RaisedButton(
-                        padding: EdgeInsets.all(5),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      HomeScreen()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            side: BorderSide(color: Color(0xfff55e61))),
-                        color: Color(0xfff55e61),
-                        textColor: Colors.white,
-                        child: Text("X",
-                            style:
-                                TextStyle(fontSize: 12, color: Colors.white)))),
-              ),
+              Image.asset('assets/health_logo.png'),
+              new Spacer(),
+              ButtonTheme(
+                  minWidth: 32,
+                  height: 32,
+                  child: RaisedButton(
+                      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                            new MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    HomeScreen()));
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                          side: BorderSide(color: Color(0xfff55e61))),
+                      color: Color(0xfff55e61),
+                      textColor: Colors.white,
+                      child: Text("X",
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.white)))),
             ],
           ),
         ),
@@ -225,20 +242,12 @@ class _LogWorkoutState extends State<LogWorkout> {
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Text('Yes'),
                 //Header Component
                 Container(
                   height: 220,
                   decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: AtHealth.red.withOpacity(0.6),
-                            offset: Offset(0, -4),
-                            blurRadius: 10,
-                            spreadRadius: 7),
-                      ],
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -251,7 +260,7 @@ class _LogWorkoutState extends State<LogWorkout> {
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20))),
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Stack(
                       children: [
                         IconButton(
@@ -284,32 +293,19 @@ class _LogWorkoutState extends State<LogWorkout> {
                                 children: [
                                   Expanded(
                                       child: GoalElem(
-                                    img: Image.asset(
-                                      'assets/fire.png',
-                                      height: 70,
-                                      width: 70,
-                                    ),
-                                    header: _calsBurned.toString(),
-                                    sub: 'Calories Burned',
+                                    img: Image.asset('/assets/fire.png'),
+                                    header: 'Yes',
+
+                                    // sub: 'yup',
                                   )),
                                   Expanded(
                                       child: GoalElem(
-                                          img: Image.asset(
-                                            'assets/clock.png',
-                                            width: 70,
-                                            height: 70,
-                                          ),
-                                          header: _hoursSpent.toString(),
-                                          sub: 'Hours')),
+                                    header: 'Yes',
+                                  )),
                                   Expanded(
                                       child: GoalElem(
-                                          img: Image.asset(
-                                            'assets/goal.png',
-                                            width: 70,
-                                            height: 70,
-                                          ),
-                                          header: _goal.toString(),
-                                          sub: 'Burn Goal')),
+                                    header: 'Junior',
+                                  )),
                                 ],
                               ),
                             ),
@@ -319,88 +315,59 @@ class _LogWorkoutState extends State<LogWorkout> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Progress',
-                            textAlign: TextAlign.left,
-                            style:
-                                TextStyle(fontSize: 26, color: AtHealth.green)),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            height: 30.0,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: LinearProgressIndicator(
-                                value: _progress,
-                                // minHeight: 20,
-                                backgroundColor: AtHealth.secondaryColor,
-                                valueColor: new AlwaysStoppedAnimation(
-                                    Color(0xffF55E61)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      FlatButton(
-                        minWidth: 200,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        color: Color(0xff54B87C),
-                        onPressed: () {
-                          createGoalDialog(context).then((onValue) {
-                            if (onValue != null) {
-                              SnackBar mySnackBar = SnackBar(
-                                content: Text(
-                                    'Your diet goal has been set to $onValue calories!',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'RopaSans',
-                                    )),
-                                backgroundColor: Color(0xff54B87C),
-                              );
-                              Scaffold.of(context).showSnackBar(mySnackBar);
-                              setState(() {
-                                _goal = int.parse(onValue);
-                                _progress = _calsBurned / _goal;
-                              });
-                            }
-                          });
-                        },
-                        child: Text(
-                          'Add Goal',
-                          style: TextStyle(
-                              fontSize: 20, color: AtHealth.primaryColor),
-                        ),
-                      ),
-                    ],
+                ButtonTheme(
+                  minWidth: 50,
+                  height: 50,
+                  child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Color(0xff54B87C),
+                    onPressed: () {
+                      createWorkoutDialog(context).then((onValue) {
+                        SnackBar mySnackBar = SnackBar(
+                          content: Text(
+                              'Your diet goal has been set to $onValue calories!',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontFamily: 'RopaSans',
+                              )),
+                          backgroundColor: Color(0xff54B87C),
+                        );
+                        Scaffold.of(context).showSnackBar(mySnackBar);
+                      });
+                    },
+                    child: Text(
+                      'Goal',
+                    ),
                   ),
                 ),
+                TextButton(
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(20)),
+                    // color: Color(0xff5CCB88),
+                    style: TextButton.styleFrom(
+                        backgroundColor: Color(0xff5CCB88),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        minimumSize: Size(100, 50)),
+                    onPressed: () {
+                      print('This works :D');
+                      createWorkoutDialog(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Text(
+                        'Add Exercise',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontFamily: 'RopaSans',
+                            color: Color(0xffFFE4BC)),
+                      ),
+                    )),
                 Container(
                   // width: 300,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.38,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: AtHealth.red.withOpacity(0.6),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                      color: Color(0xffFEBE92),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20))),
+                  // height: MediaQuery.of(context).size.height * 0.7,
+
                   // child: ListView(
                   //   shrinkWrap: true,
                   //   physics: ClampingScrollPhysics(),
@@ -413,59 +380,10 @@ class _LogWorkoutState extends State<LogWorkout> {
                   //     ),
                   //   ],
                   // ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          // width: 70,
-                          // height: 70,
-                          child: IconButton(
-                            padding: EdgeInsets.all(0),
-                            iconSize: 60,
-                            icon: Icon(
-                              Icons.add,
-                              // size: 60.0,
-                              color: AtHealth.red,
-                              textDirection: TextDirection.ltr,
-                            ),
-                            onPressed: () {
-                              if (_goal <= 0) {
-                                SnackBar mySnackBar = SnackBar(
-                                  content: Text(
-                                      'You have to add your Burn Goal first. Click the Add Goal Button.',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: 'RopaSans',
-                                      )),
-                                  backgroundColor: AtHealth.red,
-                                );
-                                Scaffold.of(context).showSnackBar(mySnackBar);
-                              } else {
-                                createWorkoutDialog(context);
-                              }
-                            },
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            // Text(
-                            //   "Your Exercises",
-                            //   style: TextStyle(fontSize: 20),
-                            // ),
-                            Expanded(
-                              child: WorkoutDisplay(
-                                arr: exerciseList,
-                                width: MediaQuery.of(context).size.width,
-                                // direction: direction,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  child: WorkoutDisplay(
+                    title: 'Cardio',
+                    arr: cardioList,
+                    direction: direction,
                   ),
                 )
               ],
@@ -480,8 +398,8 @@ class _LogWorkoutState extends State<LogWorkout> {
 class GoalElem extends StatelessWidget {
   final Image img;
   final String header;
-  final String sub;
-  GoalElem({this.header, this.img, this.sub});
+  final String sub = "Yup";
+  GoalElem({this.header, this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -500,7 +418,7 @@ class GoalElem extends StatelessWidget {
             ),
           ),
         ),
-        Text(header, style: TextStyle(fontSize: 20, color: Color(0xffDE3A3D))),
+        Text(header, style: TextStyle(fontSize: 20)),
         Text(sub)
       ],
     );
@@ -508,36 +426,101 @@ class GoalElem extends StatelessWidget {
 }
 
 class WorkoutDisplay extends StatefulWidget {
+  final String title;
   final List<Exercise> arr;
-  final double width;
-  WorkoutDisplay({
-    @required this.arr,
-    this.width,
-  });
+  final Axis direction;
+
+  WorkoutDisplay(
+      {@required this.title, @required this.arr, @required this.direction});
 
   @override
   _WorkoutDisplayState createState() => _WorkoutDisplayState();
 }
 
 class _WorkoutDisplayState extends State<WorkoutDisplay> {
+  List<Widget> generateElems() {
+    List<Exercise> temp = widget.arr;
+    List<Widget> elems = [];
+    for (int i = 0; i < 3; i++) {
+      try {
+        elems.add(ExerciseElem(
+          exercise: temp[i],
+        ));
+      } on RangeError catch (e) {
+        elems.add(Container(height: 30));
+      }
+    }
+    print(elems);
+    return elems;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
+    print('${widget.title} is rerendering!!!');
+    print("This the direction: ${widget.direction}");
+    bool _show = false;
+    bool _expanded = widget.direction == Axis.horizontal;
+    if (widget.arr.length >= 3) {
+      _show = true;
+    }
+    print(MediaQuery.of(context).size.height * 0.6);
     return Container(
-      width: widget.width * 0.7,
-      child: ListView(
-        // physics: ,
-        // children: widget.arr
-        //     .map((elem) => ExerciseElem(
-        //           exercise: elem,
-        //         ))
-        //     .toList()
-        children: widget.arr
-            .map((elem) => ExerciseElem(
-                  exercise: elem,
-                ))
-            .toList(),
+      // height: _expanded ? MediaQuery.of(context).size.height * 0.8 : 165,
+      height: MediaQuery.of(context).size.height * 0.4,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          color: Color(0xffFEBE92),
+          // border: Border.all(
+          //   color: Color(0xffF55E61),
+          // ),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          child: Stack(
+            children: [
+              Visibility(
+                visible: _show & _expanded,
+                child: Positioned(
+                  top: 0,
+                  child: Text(
+                    "100",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+              Column(
+                // physics: ,
+                // children: widget.arr
+                //     .map((elem) => ExerciseElem(
+                //           exercise: elem,
+                //         ))
+                //     .toList()
+                children: generateElems(),
+              ),
+              Visibility(
+                visible: _show & !_expanded,
+                child: Positioned(
+                  bottom: 0,
+                  child: Text(
+                    "100",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -551,22 +534,6 @@ class ExerciseElem extends StatelessWidget {
     // TODO: implement build
     return Row(
       children: [
-        Container(
-          width: 50,
-          height: 50,
-          margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-          ),
-          child: Center(
-            child: Image.asset(
-              'assets/goal.png',
-              width: 40,
-              height: 40,
-            ),
-          ),
-        ),
         Expanded(
             child: Text(
           exercise.name,
