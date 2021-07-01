@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: Text("LOGIN",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 16,
                                                   fontFamily: 'RopaSans',
                                                 )
                                             ),
@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: Text("REGISTER",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 16,
                                                   fontFamily: 'RopaSans',
                                                 )
                                             ),
@@ -193,15 +193,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _login() async {
     FocusScope.of(context).unfocus();
+
+    String jsonData = _serverDemoService.encryptKeyPairs(atSign);
     if (atSign != null) {
-      _serverDemoService.onboard().then((value) {
-        Navigator.of(context).pushReplacement(new MaterialPageRoute(
-            builder: (BuildContext context) => HomeScreen()));
+      _serverDemoService.onboard(atsign: atSign).then((value) async {
+        Navigator.pushReplacementNamed(context, HomeScreen.id);
       }).catchError((error) async {
         await _serverDemoService.authenticate(atSign,
-            cramSecret: at_demo_data.cramKeyMap[atSign]);
-        Navigator.of(context).pushReplacement(new MaterialPageRoute(
-            builder: (BuildContext context) => HomeScreen()));
+            jsonData: jsonData, decryptKey: at_demo_data.aesKeyMap[atSign]);
+        Navigator.pushReplacementNamed(context, HomeScreen.id);
       });
     }
   }

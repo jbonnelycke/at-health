@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:health/data objects/food.dart';
+import 'package:health/objects/food.dart';
 import 'package:health/screens/home_screen.dart';
 
 /*

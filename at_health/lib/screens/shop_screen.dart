@@ -217,13 +217,10 @@ class _ShopScreenState extends State<ShopScreen> {
   }
 
   _scan() async {
-    List<String> response = await _atClientService.getKeys(sharedBy: atSign);
+    List<AtKey> response = await _atClientService.getAtKeys(sharedBy: atSign);
     if (response.length > 0) {
-      List<String> scanList = response
-          .map((key) => key
-              .replaceAll('.' + conf.namespace + atSign, '')
-              .replaceAll(atSign + ':', ''))
-          .toList();
+      List<String> scanList =
+      response.map((atKey) => atKey.key).toList();
       setState(() {
         _scanItems = scanList;
       });
