@@ -15,9 +15,50 @@ class LogWorkout extends StatefulWidget {
 }
 
 class _LogWorkoutState extends State<LogWorkout> {
-  List<Exercise> cardioList = List<Exercise>();
-  List<Exercise> upperBodyList = List<Exercise>();
-  List<Exercise> lowerBodyList = List<Exercise>();
+  List<Exercise> exerciseList = List<Exercise>();
+  int _goal = 0;
+  int _calsBurned = 0;
+  double _hoursSpent = 0;
+  double _progress = 0;
+  // List<Exercise> upperBodyList = List<Exercise>();
+  // List<Exercise> lowerBodyList = List<Exercise>();
+  Future<String> createGoalDialog(BuildContext context) {
+    TextEditingController customController = TextEditingController();
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(18.0)),
+            backgroundColor: Color(0xffFFD4A9),
+            title: Text(
+              'Enter Calorie Intake Goal:',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'RopaSans',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red),
+            ),
+            content: TextField(
+              controller: customController,
+              keyboardType: TextInputType.number,
+              cursorColor: AtHealth.red,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                color: AtHealth.red,
+                elevation: 5.0,
+                child: Text('Submit'),
+                onPressed: () {
+                  Navigator.of(context).pop(customController.text.toString());
+                  //print(customController.text.toString());
+                },
+              ),
+            ],
+          );
+        });
+  }
 
   Future<Exercise> createWorkoutDialog(BuildContext context) {
     Exercise exercise = new Exercise();
