@@ -1,0 +1,41 @@
+diff a/at_health/lib/screens/subpages/log_workout.dart b/at_health/lib/screens/subpages/log_workout.dart	(rejected hunks)
+@@ -152,37 +152,15 @@
+             actions: <Widget>[
+               MaterialButton(
+                 elevation: 5.0,
++                color: AtHealth.red,
+                 child: Text('Create log'),
+                 onPressed: () {
+                   // print(exercise.toString());
+                   // print(_timed);
+                   exercise.timed = _timed;
+-                  print(exercise.timed);
+-                  print({
+-                    "name": exercise.name,
+-                    "reps": exercise.reps,
+-                    "sets": exercise.sets,
+-                    "timed": exercise.timed,
+-                    "duration": exercise.duration,
+-                    "target": exercise.target,
+-                    // ""
+-                  });
+                   exercise.target = target;
+                   setState(() {
+-                    switch (exercise.target) {
+-                      case Target.Cardio:
+-                        cardioList.insert(0, exercise);
+-                        break;
+-                      case Target.Lower_Body:
+-                        lowerBodyList.insert(0, exercise);
+-                        break;
+-                      case Target.Upper_Body:
+-                        upperBodyList.insert(0, exercise);
+-                        break;
+-                      default:
+-                        throw ('Something Broke');
+-                    }
+-                    ;
++                    exerciseList.insert(0, exercise);
+                   });
+                   Navigator.of(context).pop(exercise);
+                 },

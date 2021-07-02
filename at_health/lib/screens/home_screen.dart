@@ -7,6 +7,7 @@ import 'package:health/screens/tabs/ChallengeScreebTab.dart';
 import 'package:health/screens/tabs/HomeScreenTab.dart';
 import 'package:health/screens/tabs/profile_screen.dart';
 // import 'package:health/screens/tabs/homeScreen.dart';
+import 'package:health/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   static final String id = 'challenge';
@@ -27,10 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
           body: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment(0.0, 0.9),
-                      colors: [Color(0xffFFE4BC), Color(0xffF55E61)],
-                      stops: [0.95, 1])),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [AtHealth.primaryColor, AtHealth.secondaryColor],
+               )),
               child: TabBarView(
                 children: [
                   HomeScreenTab(context),
